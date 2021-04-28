@@ -6,7 +6,7 @@ public class Main {
         // Creating objects based on Class Human
         Human human1 = new Human();
         human1.firstName = "Andrzej";
-        human1.firstName = "Nowak";
+        human1.lastName = "Nowak";
         human1.pet = new Animal("pies");
         human1.phone = "Iphone";
 
@@ -52,5 +52,19 @@ public class Main {
 
         //Associating car1 to human1
         human1.ownedCar = car1;
+
+        //Salary Rise No1
+        human1.SalaryRise(15000.0);
+
+        //SalaryCheck
+        Double salary1 = human1.CheckSalary();
+        Double salary2 = human1.CheckSalary();
+
+        //Salary Rise No2
+        human1.SalaryRise(25000.0);
+
+        //SalaryCheck No2
+        Double salary3 = human1.CheckSalary();
+        Double salary4 = human1.CheckSalary();
     }
 }
