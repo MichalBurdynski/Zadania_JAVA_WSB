@@ -7,7 +7,7 @@ public class Human {
     public String lastName;
     public Animal pet;
     protected String phone;
-    public Car ownedCar;
+    private Car ownedCar;
     private Double salary;
 
     private Date dateSalaryCheck;
@@ -37,5 +37,29 @@ public class Human {
             System.out.println("ZUS i US zostały powiadomione o podwyżce. Nie ma sensu ukrywać podwyżki");
             this.salary = salary_;
         }
+    }
+
+    public Car humanCar()
+    {
+        return this.ownedCar;
+    }
+
+    public void IfCarAvailable(Car car_)
+    {
+        if (this.salary > car_.carValue)
+        {
+            System.out.println("Samochód kupiony za gotówkę");
+            this.ownedCar = car_;
+        }
+        else if (this.salary > (car_.carValue/12.0))
+        {
+            System.out.println("Samochód kupiony na kredyt");
+            this.ownedCar = car_;
+        }
+        else
+        {
+            System.out.println("Auto za drogie. Zmień pracę lub poproś o podwyżkę");
+        }
+
     }
 }

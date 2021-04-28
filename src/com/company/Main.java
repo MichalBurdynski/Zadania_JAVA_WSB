@@ -49,9 +49,10 @@ public class Main {
         Car car1 = new Car("Tesla", "Model 3");
         car1.fuelConsumption = 5.5;
         car1.numberOfPistons = 4;
+        car1.carValue = 30000.0;
 
         //Associating car1 to human1
-        human1.ownedCar = car1;
+        //human1.ownedCar = car1;
 
         //Salary Rise No1
         human1.SalaryRise(15000.0);
@@ -66,5 +67,13 @@ public class Main {
         //SalaryCheck No2
         Double salary3 = human1.CheckSalary();
         Double salary4 = human1.CheckSalary();
+
+        //If Car Available
+        car1.carValue = 15000.0;
+        human1.IfCarAvailable(car1);
+        car1.carValue = 30000.0;
+        human1.IfCarAvailable(car1);
+        car1.carValue = 300000.0;
+        human1.IfCarAvailable(car1);
     }
 }

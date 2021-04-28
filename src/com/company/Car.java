@@ -5,6 +5,7 @@ public class Car {
     public final String model;
     public Double fuelConsumption;
     public Integer numberOfPistons;
+    public Double carValue;
 
     Car(String producer, String model)
     {
