@@ -3,14 +3,14 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-    // Creating objects based on Class Human
+        // Creating objects based on Class Human
         Human human1 = new Human();
         human1.firstName = "Andrzej";
         human1.firstName = "Nowak";
         human1.pet = new Animal("pies");
         human1.phone = "Iphone";
 
-    // Creating objects based on class Animal
+        // Creating objects based on class Animal
         Animal dog1 = new Animal("pies");
         dog1.name = "Azorek";
         Animal cat1 = new Animal("kot");
@@ -18,7 +18,7 @@ public class Main {
         Animal crocodile1 = new Animal("krokodyl");
         crocodile1.name = "Zębuś";
 
-	//dog1
+	    //dog1
         dog1.feed();
         dog1.feed();
         dog1.takeForAWalk();
@@ -29,7 +29,7 @@ public class Main {
         dog1.feed();
         dog1.takeForAWalk();
 
-    //cat1
+        //cat1
 
         cat1.feed();
         cat1.takeForAWalk();
@@ -37,7 +37,7 @@ public class Main {
         cat1.feed();
         cat1.takeForAWalk();
 
-    //crocodile1
+        //crocodile1
         crocodile1.feed();
         crocodile1.takeForAWalk();
         crocodile1.takeForAWalk();
@@ -45,5 +45,12 @@ public class Main {
         crocodile1.takeForAWalk();
         crocodile1.feed();
 
+        //car1
+        Car car1 = new Car("Tesla", "Model 3");
+        car1.fuelConsumption = 5.5;
+        car1.numberOfPistons = 4;
+
+        //Associating car1 to human1
+        human1.ownedCar = car1;
     }
 }
