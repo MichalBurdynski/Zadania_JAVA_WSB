@@ -1,5 +1,7 @@
 package com.company;
 
+import devices.Car;
+
 import java.util.Date;
 
 public class Human {
@@ -60,6 +62,10 @@ public class Human {
         {
             System.out.println("Auto za drogie. Zmień pracę lub poproś o podwyżkę");
         }
+    }
 
+    public String toString()
+    {
+        return "Imię i nazwisko: " + firstName + " " + lastName + " posiadane zwierze: " + pet.toString() + " posiadane auto: " + ownedCar.toString() + " posiadany telefon: " + phone + " zarobki: " + salary;
     }
 }

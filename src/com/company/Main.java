@@ -1,8 +1,12 @@
 package com.company;
 
+import devices.Car;
+import devices.Phone;
+
 public class Main {
 
     public static void main(String[] args) {
+
         // Creating objects based on Class Human
         Human human1 = new Human();
         human1.firstName = "Andrzej";
@@ -52,7 +56,7 @@ public class Main {
         car1.carValue = 30000.0;
 
         //Associating car1 to human1
-        //human1.ownedCar = car1;
+        //human1.ownedCar = car1; <- commented due to change into private field from public
 
         //Salary Rise No1
         human1.SalaryRise(15000.0);
@@ -75,5 +79,25 @@ public class Main {
         human1.IfCarAvailable(car1);
         car1.carValue = 300000.0;
         human1.IfCarAvailable(car1);
+
+        //Car equals method
+        Car car2 = new Car("Honda","Jazz");
+        car2.numberOfPistons = 4;
+        Car car3 = new Car("Honda","Jazz");
+        car3.numberOfPistons = 4;
+        System.out.println(car2.equals(car3));
+        System.out.println(new Car("Honda", "Jazz").equals(car3));
+
+        //Car hashCode method
+        Car car4 = new Car("Volkswagen", "Golf", 12345);
+        Car car5 = new Car("Volkswagen", "Golf", 12345);
+        Car car6 = new Car("Volkswagen", "Golf", 12347);
+        System.out.println(car4.hashCode() == car5.hashCode());
+        System.out.println(car4.hashCode() == car6.hashCode());
+
+        //Printing in console object
+        System.out.println(human1);
+        System.out.println(car2);
+        System.out.println(car3);
     }
 }

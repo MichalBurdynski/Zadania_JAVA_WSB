@@ -50,6 +50,11 @@ public class Animal {
             System.out.println("Zwierze wyprowadzone. Masa zwierzęcia wynosi: "+this.weight);
         }
     }
+
+    public String toString()
+    {
+        return "gatunek zwierzęcia: " + species + " waga: " + weight + " imię zwierzaka: " + name + " fotka zwierzaka: " + pic;
+    }
 }
 
 
