@@ -1,8 +1,6 @@
 package devices;
 
-public class Car {
-    public final String producer;
-    public final String model;
+public class Car extends Device {
     public Double fuelConsumption;
     public Integer numberOfPistons;
     public Double carValue;
@@ -21,6 +19,7 @@ public class Car {
         this.chassisNumber = chassisNumber;
     }
 
+    @Override
     public boolean equals(Object o)
     {
         if (this == o)
@@ -39,8 +38,14 @@ public class Car {
         return "marka auta: " + producer + " model: " + model + " " + " zużycie paliwa: " + fuelConsumption + " liczba cylindrów: " + numberOfPistons + " wartość auta: " + carValue;
     }
 
+    @Override
     public int hashCode()
     {
         return chassisNumber;
+    }
+
+    public void turnOn()
+    {
+        System.out.println("Auto uruchomione.");
     }
 }

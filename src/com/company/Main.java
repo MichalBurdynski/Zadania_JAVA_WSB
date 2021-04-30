@@ -1,6 +1,7 @@
 package com.company;
 
 import devices.Car;
+import devices.Device;
 import devices.Phone;
 
 public class Main {
@@ -99,5 +100,25 @@ public class Main {
         System.out.println(human1);
         System.out.println(car2);
         System.out.println(car3);
+
+        //Testing abstract class
+        Device car7 = new Car("Skoda", "Fabia");
+        car7.turnOn();
+        System.out.println(car7.toString());
+        Device phone2 = new Phone();
+        phone2.turnOn();
+        System.out.println(phone2.toString());
+        Device car8 = new Device() {
+            @Override
+            public void turnOn() {
+                System.out.println("Moje nowe auto zostało uruchomione.");
+            }
+        };
+        car8.producer = "Ford";
+        car8.model = "Fiesta";
+        car8.yearOfProduction = 1998;
+        System.out.println(car8.toString());
+        car8.turnOn();
+
     }
 }
