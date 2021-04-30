@@ -1,8 +1,8 @@
 package com.company;
 
-import devices.Car;
-import devices.Device;
-import devices.Phone;
+import com.company.devices.Car;
+import com.company.devices.Device;
+import com.company.devices.Phone;
 
 public class Main {
 
@@ -22,6 +22,8 @@ public class Main {
         cat1.name = "Puszek";
         Animal crocodile1 = new Animal("krokodyl");
         crocodile1.name = "Zębuś";
+
+        //Testing feed and takeForAWalk method
 
 	    //dog1
         dog1.feed();
@@ -50,38 +52,39 @@ public class Main {
         crocodile1.takeForAWalk();
         crocodile1.feed();
 
-        //car1
+        //Creating object car1 and setting its fields.
         Car car1 = new Car("Tesla", "Model 3");
         car1.fuelConsumption = 5.5;
         car1.numberOfPistons = 4;
         car1.carValue = 30000.0;
 
         //Associating car1 to human1
-        //human1.ownedCar = car1; <- commented due to change into private field from public
+        //human1.ownedCar = car1; <- commented due to change modifier to private from public
 
+        //Testing setter SalaryRise and getter CheckSalary
         //Salary Rise No1
-        human1.SalaryRise(15000.0);
+        human1.salaryRise(15000.0);
 
         //SalaryCheck
-        Double salary1 = human1.CheckSalary();
-        Double salary2 = human1.CheckSalary();
+        Double salary1 = human1.checkSalary();
+        Double salary2 = human1.checkSalary();
 
         //Salary Rise No2
-        human1.SalaryRise(25000.0);
+        human1.salaryRise(25000.0);
 
         //SalaryCheck No2
-        Double salary3 = human1.CheckSalary();
-        Double salary4 = human1.CheckSalary();
+        Double salary3 = human1.checkSalary();
+        Double salary4 = human1.checkSalary();
 
-        //If Car Available
+        //Testing ifCarAvailable setter
         car1.carValue = 15000.0;
-        human1.IfCarAvailable(car1);
+        human1.ifCarAvailable(car1);
         car1.carValue = 30000.0;
-        human1.IfCarAvailable(car1);
+        human1.ifCarAvailable(car1);
         car1.carValue = 300000.0;
-        human1.IfCarAvailable(car1);
+        human1.ifCarAvailable(car1);
 
-        //Car equals method
+        //Testing equals method
         Car car2 = new Car("Honda","Jazz");
         car2.numberOfPistons = 4;
         Car car3 = new Car("Honda","Jazz");
@@ -89,19 +92,19 @@ public class Main {
         System.out.println(car2.equals(car3));
         System.out.println(new Car("Honda", "Jazz").equals(car3));
 
-        //Car hashCode method
-        Car car4 = new Car("Volkswagen", "Golf", 12345);
+        //Testing hashCode method
+                Car car4 = new Car("Volkswagen", "Golf", 12345);
         Car car5 = new Car("Volkswagen", "Golf", 12345);
         Car car6 = new Car("Volkswagen", "Golf", 12347);
         System.out.println(car4.hashCode() == car5.hashCode());
         System.out.println(car4.hashCode() == car6.hashCode());
 
-        //Printing in console object
+        //Direct printing in console fields of object - executing overridden method toString
         System.out.println(human1);
         System.out.println(car2);
         System.out.println(car3);
 
-        //Testing abstract class
+        //Testing abstract class Device
         Device car7 = new Car("Skoda", "Fabia");
         car7.turnOn();
         System.out.println(car7.toString());
@@ -119,6 +122,44 @@ public class Main {
         car8.yearOfProduction = 1998;
         System.out.println(car8.toString());
         car8.turnOn();
+
+        //Testing interface Soldable and its method sell
+        //Creating supplementary objects and setting their fields.
+        Human humanselling = new Human(10000.0);
+        humanselling.salaryRise(10000.0);
+        Human humanbuying = new Human(10000.0);
+        humanbuying.salaryRise(10000.0);
+
+        //Setting dog2 as pet of humanselling
+        Animal dog2 = new Animal("pies");
+        humanselling.pet = dog2;
+
+        //Printing in console fields of object humanselling and humanbuying
+        System.out.println(humanselling);
+        System.out.println(humanbuying);
+
+        //Selling dog
+        dog2.sell(humanselling, humanbuying, 5000.0);
+
+        //Printing in console fields of object humanselling and humanbuying after executing sell method
+        System.out.println(humanselling);
+        System.out.println(humanbuying);
+
+        //Creating car9 object and setting it for humanselling object using setter ifCarAvailable
+        Car car9 = new Car("Skoda", "Octavia");
+        car9.carValue = 6000.0;
+        humanselling.ifCarAvailable(car9);
+
+        //Printing in console fields of object humanselling and humanbuying
+        System.out.println(humanselling);
+        System.out.println(humanbuying);
+
+        //Selling car
+        car9.sell(humanselling, humanbuying, 4000.0);
+
+        //Printing in console fields of object humanselling and humanbuying after executing sell method
+        System.out.println(humanselling);
+        System.out.println(humanbuying);
 
     }
 }
