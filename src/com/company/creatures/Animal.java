@@ -1,14 +1,19 @@
-package com.company;
+package com.company.creatures;
+
+import com.company.Human;
+import com.company.Soldable;
 
 import java.io.File;
 
-public class Animal implements Soldable {
+public abstract class Animal implements Soldable, Feedable {
     final public String species;
-    private Double weight;
+    protected Double weight;
     public String name;
     File pic;
 
-    static final  public Double DEFAULT_ANIMAL_WEIGHT = 1.0;
+    //constant values of animal weight and amount of food its eats
+    static final public Double DEFAULT_ANIMAL_WEIGHT = 1.0;
+    static final public Double DEFAULT_FOOD_WEIGHT = 0.3;
 
     //Constructor with parameter species_ that depending on its value setting appropriate value to field weight
     Animal(String species_)
@@ -26,7 +31,7 @@ public class Animal implements Soldable {
         }
     }
 
-    //feed method
+    //Implementation of feed method of interface Feedable without parameter. The method took as parameter default amount of food to increase an animal weight.
     public void feed()
     {
         if (this.weight <= 0)
@@ -35,7 +40,21 @@ public class Animal implements Soldable {
         }
         else
         {
-            this.weight += 1;
+            this.weight += DEFAULT_FOOD_WEIGHT;
+            System.out.println("Zwierze nakarmione. Masa zwierzęcia wynosi: "+this.weight);
+        }
+    }
+
+    //Implementation of feed method of interface Feedable using parameter foodWeight.
+    public void feed(Double foodWeight)
+    {
+        if (this.weight <= 0)
+        {
+            System.out.println("Zwierze nie żyje");
+        }
+        else
+        {
+            this.weight += foodWeight;
             System.out.println("Zwierze nakarmione. Masa zwierzęcia wynosi: "+this.weight);
         }
     }
@@ -80,6 +99,8 @@ public class Animal implements Soldable {
             System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
         }
     }
+
+
 }
 
 

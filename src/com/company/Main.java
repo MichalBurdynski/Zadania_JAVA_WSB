@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.creatures.Animal;
+import com.company.creatures.FarmAnimal;
+import com.company.creatures.Pet;
 import com.company.devices.Car;
 import com.company.devices.Device;
 import com.company.devices.Phone;
@@ -12,15 +15,15 @@ public class Main {
         Human human1 = new Human();
         human1.firstName = "Andrzej";
         human1.lastName = "Nowak";
-        human1.pet = new Animal("pies");
+        human1.pet = new Pet("pies");
         human1.phone = "Iphone";
 
         // Creating objects based on class Animal
-        Animal dog1 = new Animal("pies");
+        Pet dog1 = new Pet("pies");
         dog1.name = "Azorek";
-        Animal cat1 = new Animal("kot");
+        Pet cat1 = new Pet("kot");
         cat1.name = "Puszek";
-        Animal crocodile1 = new Animal("krokodyl");
+        Pet crocodile1 = new Pet("krokodyl");
         crocodile1.name = "Zębuś";
 
         //Testing feed and takeForAWalk method
@@ -131,7 +134,7 @@ public class Main {
         humanbuying.salaryRise(10000.0);
 
         //Setting dog2 as pet of humanselling
-        Animal dog2 = new Animal("pies");
+        Animal dog2 = new Pet("pies");
         humanselling.pet = dog2;
 
         //Printing in console fields of object humanselling and humanbuying
@@ -161,5 +164,22 @@ public class Main {
         System.out.println(humanselling);
         System.out.println(humanbuying);
 
+        //Testing abstract class Animal and its inherited class FarmingAnimal and Pet
+        Animal swine1 = new Pet("swinka towarzyska");
+        Animal swine2 = new FarmAnimal("pyszna swinka");
+        FarmAnimal swine3 = new FarmAnimal("pyszna swinka1");
+
+        //Testing method beEaten of interface Edible. It is executed on both objects, but is implemented in inherited class FarmingAnimal
+        //The method cannot be executed objects of abstract class Animal without casting it to inherited class FarmingAnimal
+        ((FarmAnimal) swine2).beEaten();
+        swine3.beEaten();
+
+        //Testing method feed without parameter (Defaults Pet = 0.6, Farming Animal = 1.5) on objects of class Animal, Pet and FarmingAnimal
+        swine1.feed();
+        swine2.feed();
+
+        //Testing method feed with parameter on objects of class Animal, Pet and FarmingAnimal
+        swine1.feed(2.0);
+        swine2.feed(2.0);
     }
 }
