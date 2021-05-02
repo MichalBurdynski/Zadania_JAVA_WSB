@@ -3,9 +3,11 @@ package com.company;
 import com.company.creatures.Animal;
 import com.company.creatures.FarmAnimal;
 import com.company.creatures.Pet;
-import com.company.devices.Car;
-import com.company.devices.Device;
-import com.company.devices.Phone;
+import com.company.devices.*;
+
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.net.URL;
 
 public class Main {
 
@@ -56,7 +58,7 @@ public class Main {
         crocodile1.feed();
 
         //Creating object car1 and setting its fields.
-        Car car1 = new Car("Tesla", "Model 3");
+        Car car1 = new ElectricCar("Tesla", "Model 3", 45.0, false);
         car1.fuelConsumption = 5.5;
         car1.numberOfPistons = 4;
         car1.carValue = 30000.0;
@@ -88,17 +90,17 @@ public class Main {
         human1.ifCarAvailable(car1);
 
         //Testing equals method
-        Car car2 = new Car("Honda","Jazz");
+        Car car2 = new LPGCar("Honda","Jazz", 0.0);
         car2.numberOfPistons = 4;
-        Car car3 = new Car("Honda","Jazz");
+        Car car3 = new LPGCar("Honda","Jazz", 0.0);
         car3.numberOfPistons = 4;
         System.out.println(car2.equals(car3));
-        System.out.println(new Car("Honda", "Jazz").equals(car3));
+        System.out.println(new LPGCar("Honda", "Jazz", 0.0).equals(car3));
 
         //Testing hashCode method
-                Car car4 = new Car("Volkswagen", "Golf", 12345);
-        Car car5 = new Car("Volkswagen", "Golf", 12345);
-        Car car6 = new Car("Volkswagen", "Golf", 12347);
+                Car car4 = new DieselCar("Volkswagen", "Golf", 12345, false);
+        Car car5 = new DieselCar("Volkswagen", "Golf", 12345, false);
+        Car car6 = new DieselCar("Volkswagen", "Golf", 12347, false);
         System.out.println(car4.hashCode() == car5.hashCode());
         System.out.println(car4.hashCode() == car6.hashCode());
 
@@ -108,7 +110,7 @@ public class Main {
         System.out.println(car3);
 
         //Testing abstract class Device
-        Device car7 = new Car("Skoda", "Fabia");
+        Device car7 = new DieselCar("Skoda", "Fabia", false);
         car7.turnOn();
         System.out.println(car7.toString());
         Device phone2 = new Phone();
@@ -149,7 +151,7 @@ public class Main {
         System.out.println(humanbuying);
 
         //Creating car9 object and setting it for humanselling object using setter ifCarAvailable
-        Car car9 = new Car("Skoda", "Octavia");
+        Car car9 = new DieselCar("Skoda", "Octavia", false);
         car9.carValue = 6000.0;
         humanselling.ifCarAvailable(car9);
 
@@ -181,5 +183,48 @@ public class Main {
         //Testing method feed with parameter on objects of class Animal, Pet and FarmingAnimal
         swine1.feed(2.0);
         swine2.feed(2.0);
+
+        //Testing overloading method installAnnApp
+        //Creating phone for a test
+        Phone phone3 = new Phone();
+
+        //Overloading installAnnApp method with different parameters
+        phone3.installAnnApp("Soccer Manager");
+        phone3.installAnnApp("Soccer Manager", "15.0");
+        phone3.installAnnApp("Soccer Manager", "15.0", "https://google.com/SoccerManager.jar");
+        ArrayList<String> applicationList = new ArrayList<String>();
+        applicationList.add("Soccer Manager");
+        applicationList.add("Car Race");
+        applicationList.add("City Builder");
+        applicationList.add("Messenger Call");
+        phone3.installAnnApp(applicationList);
+        try {
+            URL url1 = new URL("https", "www.wp.pl", "wp.exe");
+            phone3.installAnnApp(url1);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            URL url2 = null;
+            phone3.installAnnApp(url2);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            URL url3 = new URL(Phone.DEFAULT_PROTOCOL, Phone.DEFAULT_SERVER_ADDRESS, Phone.DEFAULT_FILENAME);
+            phone3.installAnnApp(url3);
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+
+        //Testing method refuel
+        Car car10 = new ElectricCar("Tesla", "Model 5", 45.0,true);
+        Car car11 = new DieselCar("Ford", "Mondeo", true);
+        Car car12 = new LPGCar("Renault", "Clio",36.0);
+        car10.refuel();
+        car11.refuel();
+        car12.refuel();
     }
 }

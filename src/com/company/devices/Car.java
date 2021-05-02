@@ -3,7 +3,7 @@ package com.company.devices;
 import com.company.Human;
 import com.company.Soldable;
 
-public class Car extends Device implements Soldable {
+public abstract class Car extends Device implements Soldable {
     public Double fuelConsumption;
     public Integer numberOfPistons;
     public Double carValue;
@@ -40,7 +40,7 @@ public class Car extends Device implements Soldable {
     }
 
 
-    //toString method containg fields from abstract class Device
+    //toString method containing fields from abstract class Car
     public String toString()
     {
         return "marka auta: " + producer + " model: " + model + " " + " zużycie paliwa: " + fuelConsumption + " liczba cylindrów: " + numberOfPistons + " wartość auta: " + carValue;
@@ -79,4 +79,6 @@ public class Car extends Device implements Soldable {
             System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
         }
     }
+
+    public abstract void refuel();
 }
