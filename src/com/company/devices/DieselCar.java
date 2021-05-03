@@ -18,7 +18,7 @@ public class DieselCar extends Car{
     //toString method containing fields from abstract class Car
     public String toString()
     {
-        return "marka auta: " + producer + " model: " + model + " " + " zużycie paliwa: " + fuelConsumption + " liczba cylindrów: " + numberOfPistons + " wartość auta: " + carValue + " czy ma DPF:" + hasDieselParticulateFilter;
+        return super.toString()+ "\nczy ma DPF:" + hasDieselParticulateFilter;
     }
 
     //Implementation of abstract method refuel

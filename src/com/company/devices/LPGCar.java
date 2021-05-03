@@ -18,7 +18,7 @@ public class LPGCar extends Car {
     //toString method containing fields from abstract class Car
     public String toString()
     {
-        return "marka auta: " + producer + " model: " + model + " " + " zużycie paliwa: " + fuelConsumption + " liczba cylindrów: " + numberOfPistons + " wartość auta: " + carValue + " pojemność zbiornika LPG: "+capacityLPGTank;
+        return super.toString() + "\nPojemność zbiornika LPG: "+capacityLPGTank;
     }
 
     //Implementation of abstract method refuel

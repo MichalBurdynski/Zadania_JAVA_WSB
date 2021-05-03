@@ -5,11 +5,9 @@ import com.company.Soldable;
 
 public abstract class Car extends Device implements Soldable {
     public Double fuelConsumption;
-    public Integer numberOfPistons;
-    public Double carValue;
     private Integer chassisNumber;
 
-    //Construtor with parameters producer and model
+    //Constructor with parameters producer and model
     public Car(String producer, String model)
     {
         this.producer = producer;
@@ -36,17 +34,17 @@ public abstract class Car extends Device implements Soldable {
         {
             return false;
         }
-        return (producer.equals(((Car) o).producer) && model.equals(((Car) o).model) && fuelConsumption == ((Car) o).fuelConsumption) && numberOfPistons == (((Car) o).numberOfPistons) && carValue == (((Car) o).carValue);
+        return (producer.equals(((Car) o).producer) && model.equals(((Car) o).model) && fuelConsumption == ((Car) o).fuelConsumption) && value == ((Car) o).value && yearOfProduction == ((Car) o).yearOfProduction;
     }
 
 
     //toString method containing fields from abstract class Car
     public String toString()
     {
-        return "marka auta: " + producer + " model: " + model + " " + " zużycie paliwa: " + fuelConsumption + " liczba cylindrów: " + numberOfPistons + " wartość auta: " + carValue;
+        return super.toString() + "\nZużycie środka napędowego: " + fuelConsumption;
     }
 
-    //Overridden method hashCode. It return chassisnumber as unique identifier
+    //Overridden method hashCode. It return chassisNumber as unique identifier
     @Override
     public int hashCode()
     {
@@ -60,25 +58,58 @@ public abstract class Car extends Device implements Soldable {
     }
 
     //Implementation of interface Soldable
-    public void sell(Human seller, Human buyer, Double price)
-    {
-        if(seller.ownedCar() != null && buyer.cash() > price) {
-            seller.incomeCash(price);
-            buyer.incomeCash(-price);
-            buyer.buyDevice(seller.ownedCar());
-            seller.buyDevice(null);
-            System.out.println("Urządzenie sprzedane.");
+    public void sell(Human seller, Human buyer, Double price) throws Exception {
+        {
+            //Checking whether seller has a car in garage
+                boolean isOwner = false;
+                Integer carPositionInGarage = null;
+                if (seller.ownedCars().length > 0) {
+                    for (int i = 0; i < seller.ownedCars().length; i++) {
+                        if (seller.ownedCars()[i] == this) {
+                            isOwner = true;
+                            carPositionInGarage = i;
+                            break;
+                        }
+                    }
+                }
+                if (!isOwner) throw new Exception("Sprzedający nie ma samochodu.");
 
+
+            //Checking whether buyer has a free space in garage
+
+                int freeGarageSpaces = buyer.ownedCars().length;
+                if (buyer.ownedCars().length > 0) {
+                    for (int i = 0; i < buyer.ownedCars().length; i++) {
+                        if (buyer.ownedCars()[i] != null) {
+                            freeGarageSpaces--;
+                        }
+                    }
+                }
+                if (freeGarageSpaces == 0) throw new Exception("Kupujący nie ma miejsca w garażu.");
+
+
+            //Checking whether buyer has appropriate amount of cashAvailable
+
+                if (buyer.cashAvailable() < price) throw new Exception("Kupujący nie ma wystarczającej ilości pieniędzy");
+
+            Integer newCarPositionInGarage = null;
+            if (buyer.ownedCars().length > 0) {
+                for (int i = 0; i < buyer.ownedCars().length; i++) {
+                    if (buyer.ownedCars()[i] == null) {
+                        newCarPositionInGarage = i;
+                        break;
+                    }
+                }
+            }
+
+                seller.incomeCash(price);
+                buyer.incomeCash(-price);
+                Car soldCar = seller.getCar(carPositionInGarage);
+                buyer.setCar(soldCar, newCarPositionInGarage);
+                seller.setCar(null, carPositionInGarage);
+                System.out.println("Samochód sprzedany.");
+            }
         }
-        else if (seller.ownedCar() == null)
-        {
-            System.out.println("Sprzedający nie ma urządzenia.");
-        }
-        else
-        {
-            System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
-        }
-    }
 
     public abstract void refuel();
 }

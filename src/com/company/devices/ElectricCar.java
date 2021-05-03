@@ -2,8 +2,8 @@ package com.company.devices;
 
 public class ElectricCar extends Car {
 
-    private Double batteryCapacity;
-    private Boolean hasCharger;
+    private final Double batteryCapacity;
+    private final Boolean hasCharger;
 
     //Constructors
     public ElectricCar(String producer, String model, Double batteryCapacity, Boolean hasCharger) {
@@ -21,7 +21,7 @@ public class ElectricCar extends Car {
     //toString method containing fields from abstract class Car
     public String toString()
     {
-        return "marka auta: " + producer + " model: " + model + " " + " zużycie energii: " + fuelConsumption + " wartość auta: " + carValue + " pojemność baterii: " + batteryCapacity + " czy ma ładowrkę na pokładzie: "+ hasCharger;
+        return super.toString()+ "\nPojemność baterii: " + batteryCapacity + "\nCzy ma ładowrkę na pokładzie: "+ hasCharger;
     }
 
     //Implementation abstract method refuel

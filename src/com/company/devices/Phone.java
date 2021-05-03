@@ -25,9 +25,9 @@ public class Phone extends Device implements Soldable {
     }
 
     //Implementation of interface Soldable
-    public void sell(Human seller, Human buyer, Double price)
+    /*public void sell(Human seller, Human buyer, Double price)
     {
-        if(seller.ownedPhone() != null && buyer.cash() > price) {
+        if(seller.ownedPhone() != null && buyer.cashAvailable() > price) {
             seller.incomeCash(price);
             buyer.incomeCash(-price);
             buyer.buyDevice(seller.ownedPhone());
@@ -44,6 +44,7 @@ public class Phone extends Device implements Soldable {
             System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
         }
     }
+    */
 
     //Implementation of method installAnnApp with parameter appName
     public void installAnnApp(String appName)

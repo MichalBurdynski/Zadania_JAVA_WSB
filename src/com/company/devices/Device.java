@@ -7,20 +7,20 @@ public abstract class Device implements Soldable {
     public String producer;
     public String model;
     public Integer yearOfProduction;
+    public Double value;
 
 
     //toString method
     public String toString()
     {
-        return " producent: " + producer + " model: " + model + " rok produkcji: " + yearOfProduction;
+        return "Producent: " + producer + "\nModel: " + model + "\nRok produkcji: " + yearOfProduction + "\nWartość:" + value ;
     }
 
-    //abstract method turnOn
+    //Declaration of an abstract method turnOn
     public abstract void turnOn();
 
     //sell method of interface Soldable
-    public void sell(Human seller, Human buyer, Double price)
-    {
+    public void sell(Human seller, Human buyer, Double price) throws Exception {
     }
 
 }
