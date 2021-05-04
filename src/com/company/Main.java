@@ -3,6 +3,7 @@ package com.company;
 import com.company.creatures.*;
 import com.company.devices.*;
 
+import java.awt.desktop.SystemEventListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -155,7 +156,7 @@ public class Main {
 
         Device phone2 = new Phone();
         phone2.turnOn();
-        System.out.println(phone2.toString());
+        System.out.println(phone2);
 
         System.out.println();
 
@@ -168,7 +169,7 @@ public class Main {
         car8.producer = "Ford";
         car8.model = "Fiesta";
         car8.yearOfProduction = 1998;
-        System.out.println(car8.toString());
+        System.out.println(car8);
         car8.turnOn();
 
         System.out.println();
@@ -207,7 +208,7 @@ public class Main {
         Car car9 = new DieselCar("Skoda", "Octavia", false);
         car9.value = 6000.0;
         humanselling.setCar(car9,1);
-
+        car9.addTransaction(new Transaction(humanbuying, humanselling, 4000.0));
         System.out.println("Dane przed sprzedażą auta\n");
 
         //Printing in console fields of object humanselling and humanbuying
@@ -221,7 +222,9 @@ public class Main {
         try {
             car9.sell(humanselling, humanbuying, 4000.0);
         }
-        catch (Exception e){};
+        catch (Exception e){
+            System.out.println(e);
+        }
 
 
 
@@ -313,36 +316,43 @@ public class Main {
         car13.fuelConsumption = 12.0;
         car13.value = 20000.0;
         car13.yearOfProduction = 2018;
+        car13.addTransaction(new Transaction(human1, human4, 4000.0));
 
         ElectricCar car14 = new ElectricCar("Renault","Clio",45.0,true);
         car14.fuelConsumption = 12.0;
         car14.value = 25000.0;
         car14.yearOfProduction = 2017;
+        car14.addTransaction(new Transaction(human1, human4, 4000.0));
 
         ElectricCar car15 = new ElectricCar("Renault","Kadjar",60.0,false);
         car15.fuelConsumption = 15.0;
         car15.value = 17000.0;
         car15.yearOfProduction = 2021;
+        car15.addTransaction(new Transaction(human1, human4, 4000.0));
 
         ElectricCar car16 = new ElectricCar("Renault","Kadjar",60.0,false);
         car16.fuelConsumption = 15.0;
         car16.value = 17000.0;
         car16.yearOfProduction = 2019;
+        car16.addTransaction(new Transaction(human1, human4, 4000.0));
 
         ElectricCar car17 = new ElectricCar("Renault","Kadjar",60.0,false);
         car17.fuelConsumption = 15.0;
         car17.value = 17000.0;
         car17.yearOfProduction = 2020;
+        car17.addTransaction(new Transaction(human1, human4, 4000.0));
 
         ElectricCar car18 = new ElectricCar("Renault","Kadjar",60.0,false);
         car18.fuelConsumption = 15.0;
         car18.value = 17000.0;
         car18.yearOfProduction = 2016;
+        car18.addTransaction(new Transaction(human1, human4, 4000.0));
 
         ElectricCar car19 = new ElectricCar("Renault","Kadjar",60.0,false);
         car19.fuelConsumption = 15.0;
         car19.value = 17000.0;
         car19.yearOfProduction = 2015;
+        car19.addTransaction(new Transaction(human1, human4, 4000.0));
 
         //Testing if possible is setting two cars at the same garage space
         human4.setCar(car13,0);
@@ -388,6 +398,14 @@ public class Main {
         //Buying human does not have appropriate amount of cash
         try {
             car13.sell(human4, human1, 50000.0);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+        //Selling human does not own car13
+        try {
+            car13.sell(human1, human4, 5000.0);
         }
         catch (Exception e){
             System.out.println(e);
@@ -444,6 +462,7 @@ public class Main {
         }
 
         System.out.println();
+        System.out.println("Dane po sprzedaży aut:\n");
 
         //Printing in console fields of object human4 and human1 after transactions
         System.out.println("Dane sprzedającego:");
@@ -459,11 +478,41 @@ public class Main {
 
 
         //Printing in console fields of object human4 and human1 after sorting
+        System.out.println("Posortowane auta:\n");
         System.out.println("Dane sprzedającego:");
         System.out.println(human4);
         System.out.println("Dane kupującego:");
         System.out.println(human1);
         System.out.println();
+
+        //Checking whether human1 was owner of car15
+        System.out.println("Sprawdzenie czy human1 był kiedykolwiek posiadaczem auta car15\n");
+        System.out.println(car15.wasCarOwner(human1));
+
+        //Checking whether humanselling was owner of car15
+        System.out.println("Sprawdzenie czy humanselling był kiedykolwiek posiadaczem auta car15\n");
+        System.out.println(car15.wasCarOwner(humanselling));
+
+        //Checking whether human1 sold car15 to human4
+        System.out.println("Sprawdzenie czy human1 kiedykolwiek sprzedał human4 auto car15\n");
+        System.out.println(car15.wasCarSold(human1, human4));
+
+        //Checking whether human4 sold car15 to humanbuying
+        System.out.println("Sprawdzenie czy human4 kiedykolwiek sprzedał humanbuying auto car15\n");
+        System.out.println(car15.wasCarSold(human4, humanbuying));
+
+        //Checking number of sales transaction of car15
+        System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car15\n");
+        System.out.println(car15.numberOfTransactions());
+
+        //Checking number of sales transaction of car7
+        System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car7\n");
+        System.out.println( ((Car) car7).numberOfTransactions());
+
+        //Checking number of sales transaction of car8
+        System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car6\n");
+        System.out.println( ((Car) car6).numberOfTransactions());
+
 
     }
 }
