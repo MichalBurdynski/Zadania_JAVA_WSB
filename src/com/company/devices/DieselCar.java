@@ -16,6 +16,7 @@ public class DieselCar extends Car{
     }
 
     //toString method containing fields from abstract class Car
+    @Override
     public String toString()
     {
         return super.toString()+ "\nczy ma DPF:" + hasDieselParticulateFilter;

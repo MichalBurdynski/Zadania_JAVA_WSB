@@ -32,7 +32,7 @@ public abstract class Animal implements Soldable, Feedable {
     }
 
     /* Implementation of feed method of interface Feedable without parameter.
-    The method took as parameter default amount of food to increase an animal weight. */
+    The method takes as parameter default amount of food to increase an animal weight. */
     public void feed()
     {
         if (this.weight <= 0)
@@ -46,7 +46,7 @@ public abstract class Animal implements Soldable, Feedable {
         }
     }
 
-    //Implementation of feed method of interface Feedable using parameter foodWeight.
+    //Implementation of feed method of interface Feedable using parameter 'foodWeight'.
     public void feed(Double foodWeight)
     {
         if (this.weight <= 0)
@@ -60,7 +60,7 @@ public abstract class Animal implements Soldable, Feedable {
         }
     }
 
-    //takeForAWalk method This method decrease Animal weight
+    //takeForAWalk method This method decreases animal weight by 3.0.
     public void takeForAWalk()
     {
         if (this.weight <= 0.0)
@@ -77,7 +77,7 @@ public abstract class Animal implements Soldable, Feedable {
     //toString method
     public String toString()
     {
-        return "gatunek zwierzęcia:" + species + "\nwaga: " + weight + "\nimię zwierzaka: " + name + "\nfotka zwierzaka: " + pic;
+        return "\nGatunek zwierzęcia:" + species + "\nWaga: " + weight + "\nImię zwierzaka: " + name + "\nZdjęcie zwierzaka: " + pic +"\n";
     }
 
     //Implementation sell method of interface Soldable
@@ -100,8 +100,6 @@ public abstract class Animal implements Soldable, Feedable {
             System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
         }
     }
-
-
 }
 
 

@@ -10,7 +10,7 @@ public class FarmAnimal extends Animal implements Edible, Feedable {
     final static Double DEFAULT_FOOD_WEIGHT = 1.5;
 
     /* Implementation of feed method of interface Feedable without parameter.
-    The method took as parameter default amount of food to increase an animal weight. */
+    The method takes as parameter default amount of food to increase an animal weight. */
     public void feed()
     {
         if (this.weight <= 0)

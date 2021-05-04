@@ -9,7 +9,7 @@ public abstract class Car extends Device implements Soldable {
     public Double fuelConsumption;
     private Integer chassisNumber;
 
-    private ArrayList<Transaction> ownerList;
+    private final ArrayList<Transaction> ownerList;
 
     //Constructor with parameters producer and model
     public Car(String producer, String model)
@@ -19,7 +19,7 @@ public abstract class Car extends Device implements Soldable {
         this.ownerList = new ArrayList<>();
     }
 
-    //Constructor with parameters producer, model, chassisnumber
+    //Constructor with parameters producer, model and chassisnumber
     public Car(String producer, String model, Integer chassisNumber)
     {
         this.producer = producer;
@@ -44,20 +44,17 @@ public abstract class Car extends Device implements Soldable {
     }
 
 
-    //toString method containing fields from abstract class Car
+    //toString method containing fields from abstract class Device and inherited class Car
+    @Override
     public String toString()
     {
         String string = super.toString() + "\nZużycie środka napędowego: " + fuelConsumption;
-        if (ownerList != null && ownerList.size() != 0) {
-             string += "\nLista transakcji sprzedaży auta:\n";
-             for (int i = 0; i < ownerList.size(); i++)
-             {
-                 string += "Transakcja nr: "+ i + "\n" + ownerList.get(i)+"\n";
-             }
+        if (!ownerList.isEmpty()) {
+             string += "\nLista transakcji sprzedaży auta:\n"+ownerList;
         }
         else
         {
-            string += "\nNie odnotowano transakcji";
+            string += "\nNie odnotowano transakcji.";
         }
 
         return  string;
@@ -79,7 +76,7 @@ public abstract class Car extends Device implements Soldable {
     //Implementation of interface Soldable
     public void sell(Human seller, Human buyer, Double price) throws Exception {
         {
-            //Checking whether seller has a car in garage and is its owner
+            //Checking whether seller has a car in garage and is the owner
                 boolean isOwner = false;
                 Integer carPositionInGarage = null;
                     for (int i = 0; i < seller.ownedCars().length; i++) {
@@ -103,7 +100,7 @@ public abstract class Car extends Device implements Soldable {
                 if (!isOwner) throw new Exception("Sprzedający nie ma samochodu.");
 
 
-            //Checking whether buyer has a free space in garage
+            //Checking whether buyer has a free garage space
 
                 int freeGarageSpaces = buyer.ownedCars().length;
                 if (buyer.ownedCars().length > 0) {
@@ -116,9 +113,9 @@ public abstract class Car extends Device implements Soldable {
                 if (freeGarageSpaces == 0) throw new Exception("Kupujący nie ma miejsca w garażu.");
 
 
-            //Checking whether buyer has appropriate amount of cashAvailable
+            //Checking whether buyer has enough cash
 
-                if (buyer.cashAvailable() < price) throw new Exception("Kupujący nie ma wystarczającej ilości pieniędzy");
+            if (buyer.cashAvailable() < price) throw new Exception("Kupujący nie ma wystarczającej ilości pieniędzy.");
 
             Integer newCarPositionInGarage = null;
             if (buyer.ownedCars().length > 0) {
@@ -141,17 +138,15 @@ public abstract class Car extends Device implements Soldable {
             }
         }
 
+    //Declaration of abstract method refuel
     public abstract void refuel();
 
-    //Method checking whether people was an owner of car
+    //Method checking whether a man owned the car
     public boolean wasCarOwner(Human human)
     {
         boolean wasCarOwner = false;
-        for (int i = 0; i < this.ownerList.size(); i++)
-        {
-            Transaction checkedTransaction = this.ownerList.get(i);
-            if (checkedTransaction.deviceOwner() == human || checkedTransaction.devicePreviousOwner() == human)
-            {
+        for (Transaction checkedTransaction : this.ownerList) {
+            if (checkedTransaction.deviceOwner() == human || checkedTransaction.devicePreviousOwner() == human) {
                 wasCarOwner = true;
                 break;
             }
@@ -164,11 +159,8 @@ public abstract class Car extends Device implements Soldable {
     public boolean wasCarSold(Human humanA, Human humanB)
     {
         boolean wasCarSold = false;
-        for (int i = 0; i < this.ownerList.size(); i++)
-        {
-            Transaction checkedTransaction = this.ownerList.get(i);
-            if (checkedTransaction.deviceOwner() == humanB && checkedTransaction.devicePreviousOwner() == humanA)
-            {
+        for (Transaction checkedTransaction : this.ownerList) {
+            if (checkedTransaction.deviceOwner() == humanB && checkedTransaction.devicePreviousOwner() == humanA) {
                 wasCarSold = true;
                 break;
             }
@@ -179,8 +171,7 @@ public abstract class Car extends Device implements Soldable {
     //Method returning number of car sales transactions
     public Integer numberOfTransactions()
     {
-        int numberOfTransactions = this.ownerList.size();
-        return numberOfTransactions;
+        return this.ownerList.size();
     }
 
     //Supplementary setter of sales transactions

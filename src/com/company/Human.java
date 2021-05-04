@@ -4,6 +4,7 @@ import com.company.creatures.Animal;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Human {
@@ -12,9 +13,9 @@ public class Human {
     public String lastName;
     public Animal pet;
     protected String phone;
-    private Phone ownedPhone;
+    private final ArrayList<Phone> ownedPhone;
 
-    //Arrays of owned cars
+    //Array of owned cars
     private final Car[] garage;
 
 
@@ -53,7 +54,7 @@ public class Human {
         }
     }
 
-    //Getter returning information of owned cars - if human has a car it return object of class Car, else it return null
+    //Getter returning information of owned cars - if human has a cars, returns array of class Car objects, otherwise it return null.
     public Car[] humanCar()
     {
         return this.garage;
@@ -64,7 +65,7 @@ public class Human {
     {
         if (this.salary > car_.value)
         {
-            System.out.println("Samochód kupiony za gotówkę");
+            System.out.println("Samochód kupiony za gotówkę.");
             for (int i = 0; i < garage.length; i++)
             {
                 if (garage[i] != null)
@@ -76,7 +77,7 @@ public class Human {
         }
         else if (this.salary > (car_.value/12.0))
         {
-            System.out.println("Samochód kupiony na kredyt");
+            System.out.println("Samochód kupiony na kredyt.");
             for (int i = 0; i < garage.length; i++)
             {
                 if (garage[i] != null)
@@ -88,65 +89,49 @@ public class Human {
         }
         else
         {
-            System.out.println("Auto za drogie. Zmień pracę lub poproś o podwyżkę");
+            System.out.println("Auto za drogie. Zmień pracę lub poproś o podwyżkę.");
         }
     }
 
-    //toString method. It checks if human has a car or pet and return appropriate information
+    //toString method Provide full information contained in fields of Human class object
+    @Override
     public String toString()
     {
-        String statement = "";
 
-        //Printing owned car details
+        //Printing details of cars, that are stored in garage
         String cars = "";
-            for (int i = 0; i < garage.length; i++)
+        for (int i = 0; i < garage.length; i++)
+        {
+            if (garage[i] != null)
             {
-                if (garage[i] != null)
-                {
-                    cars += "Auto nr: "+i+'\n'+garage[i].toString() + '\n';
-                }
+                cars += "Auto nr: "+i+'\n'+garage[i].toString() + '\n';
             }
+        }
+        if (cars == "")
+        {
+            cars = "Nie posiada auta.\n";
+        }
 
-        if (cars != "" && pet != null) {
-            statement =  "Imię i nazwisko: " + firstName + " " + lastName + "\nPosiadane zwierze:\n" + pet + "\nPosiadane auta:\n" + cars + "Posiadany telefon: " + phone + "\nZarobki: " + salary + "\nDostępne pieniądze: " + cash;
-        }
-        else if (cars == "" && pet != null)
-        {
-            statement =  "Imię i nazwisko: " + firstName + " " + lastName + "\nPosiadane zwierze:\n" + pet + "\nNie posiada auta.\nPosiadany telefon: " + phone + "\nZarobki: " + salary + "\nDostępne pieniądze: " + cash;
-        }
-        else if (cars != "" && pet == null)
-        {
-            statement =  "Imię i nazwisko: " + firstName + " " + lastName + "\nNie posiada zwierzęcia.\nPosiadane auta:\n" + cars + "Posiadany telefon: " + phone + "\nZarobki: " + salary + "\nDostępne pieniądze: " + cash;
-        }
-        else
-        {
-            statement =  "Imię i nazwisko: " + firstName + " " + lastName + "\nNie posiada zwierzęcia.\nNie posiada auta.\nPosiadany telefon: " + phone + "\nZarobki: " + salary + "\nDostępne pieniądze: " + cash;
-        }
-        return statement;
+        return  "Imię i nazwisko: " + firstName + " " + lastName + "\nPosiadane zwierze:\n" + pet + "\nPosiadane auta:\n" + cars + "Posiadane telefony " + ownedPhone + "\nZarobki: " + salary + "\nDostępne pieniądze: " + cash;
+
     }
 
-    //Supplementary getter for interface Soldable returning value of field cashAvailable
+    //Supplementary getter for interface 'Soldable' returning value of field 'cash'
 
     public Double cashAvailable()
     {
         return this.cash;
     }
-    //Supplementary setter for interface Soldable adding value of parameter cash_ to field cashAvailable;
+    //Supplementary setter for interface 'Soldable' adding value of 'cash_' parameter to 'cash' field
     public void incomeCash(Double cash_)
     {
         this.cash += cash_;
     }
 
-    //Supplementary getter for interface Soldable returning array of object Car garage
+    //Supplementary getter for interface 'Soldable' returning array of Car class objects
     public Car[] ownedCars()
     {
         return this.garage;
-    }
-
-    //Supplementary getter for interface Soldable returning value of field ownedPhone
-    public Phone ownedPhone()
-    {
-        return this.ownedPhone;
     }
 
     //Default constructor
@@ -155,23 +140,25 @@ public class Human {
         //Default garage capacity = 5
         this.garage = new Car[5];
         this.cash = 0.0;
+        this.ownedPhone = new ArrayList<Phone>();
     }
 
-    //Supplementary setter with parameter cash_
+    //Supplementary setter with 'cash_' parameter
     public void addCash(Double cash_)
     {
         this.cash += cash_;
     }
 
-    //Supplementary constructor with parameter garageCapacity
+    //Supplementary constructor with 'garageCapacity' parameter
     Human(Integer garageCapacity)
     {
         //Garage capacity depends on parameter garageCapacity
         this.garage = new Car[garageCapacity];
         this.cash = 0.0;
+        this.ownedPhone = new ArrayList<Phone>();
     }
 
-    //Implementation of getter getCar returning Car object from array garage at index equals to garageSpaceNumber
+    //Implementation of getter getCar returning Car class object from array 'garage' with index equal to garageSpaceNumber
     public Car getCar(Integer garageSpaceNumber)
     {
         Car returnedCar = null;
@@ -185,7 +172,7 @@ public class Human {
         return returnedCar;
     }
 
-    //Implementation of setter setCar setting Car object in array garage at index equals to garageSpaceNumber
+    //Implementation of setter setCar setting Car class object in array 'garage' with index equal to garageSpaceNumber
     public void setCar(Car car, Integer garageSpaceNumber)
     {
         if (garageSpaceNumber > this.garage.length)
@@ -196,7 +183,7 @@ public class Human {
             this.garage[garageSpaceNumber] = car;
         }
         else if (garageSpaceNumber <= this.garage.length && car == null) {
-            this.garage[garageSpaceNumber] = car;
+            this.garage[garageSpaceNumber] = null;
         }
         else
         {
@@ -206,24 +193,23 @@ public class Human {
         }
     }
 
-    //Implementation of method sumCarValue setting sum of car values in garage to field value in Device class
+    //Implementation of method sumCarValue, adding up car values in 'garage' array
     public void sumCarValue()
     {
-
             Double sum = 0.0;
-            for (int i = 0; i < garage.length; i++)
-            {
+        for (Car car : garage) {
 
-               if (garage[i] != null) {
-                   sum += garage[i].value;
-               }
+            if (car != null) {
+                sum += car.value;
             }
+        }
             System.out.println("Wartość posiadanych aut przez "+this.firstName + " "+ this.lastName+ " wynosi: "+sum);
 
     }
 
-    //Implementation of method sortCarByYearOfProduction, sorting Car objects in array garage by ascending yearOfProduction
-    //Implemented bubble sort algorithm by to small amount of cars
+    /*Implementation of method sortCarByYearOfProduction, sorting out Car class objects
+     in 'garage' array by value of 'yearOfProduction' field in ascending order*/
+    //Bubble sort algorithm implemented due to small amount of cars
     public void sortCarByYearOfProduction()
     {
         for (int i = 0; i < garage.length; i++)
@@ -238,6 +224,38 @@ public class Human {
                 }
             }
         }
+    }
+
+    //Getter returning Phone class object at specified index in 'ownedPhone' ArrayList for interface 'Soldable'
+    public Phone getPhone(int number)
+    {
+        Phone returnedPhone = null;
+        if (number <= this.ownedPhone.size()) {
+            returnedPhone =  this.ownedPhone.get(number);
+        }
+        else
+        {
+            System.out.println("Podany numer miejsca jest wyższy niż ilość miejsc w szufladzie na telefony. Metoda zwróci pusty obiekt.");
+        }
+        return returnedPhone;
+    }
+
+    //Setter adding Phone class object to ArrayList 'ownedPhone'
+    public void setPhone(Phone phone)
+    {
+        this.ownedPhone.add(phone);
+    }
+
+    //Setter removing Phone class object from the Arraylist 'ownedPhone' at the specified index
+    public void removePhone(int number)
+    {
+        this.ownedPhone.remove(number);
+    }
+
+    //Getter returning list of owned phones
+    public ArrayList<Phone> ownedPhones()
+    {
+        return this.ownedPhone;
     }
 
 }

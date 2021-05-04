@@ -11,6 +11,7 @@ public abstract class Device implements Soldable {
 
 
     //toString method
+    @Override
     public String toString()
     {
         return "Producent: " + producer + "\nModel: " + model + "\nRok produkcji: " + yearOfProduction + "\nWartość:" + value ;

@@ -3,7 +3,6 @@ package com.company;
 import com.company.creatures.*;
 import com.company.devices.*;
 
-import java.awt.desktop.SystemEventListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,14 +12,14 @@ public class Main {
     public static void main(String[] args) {
 
 
-        // Creating objects based on Class Human
+        // Creating Human class objects
         Human human1 = new Human();
         human1.firstName = "Andrzej";
         human1.lastName = "Nowak";
         human1.pet = new Pet("pies");
         human1.phone = "Iphone";
 
-        // Creating objects based on class Animal
+        // Creating Animal class objects
         Pet dog1 = new Pet("pies");
         dog1.name = "Azorek";
         Pet cat1 = new Pet("kot");
@@ -77,11 +76,12 @@ public class Main {
 
         System.out.println();
 
-        //SalaryCheck
+        //SalaryCheck No1
         Double salary1 = human1.checkSalary();
 
         System.out.println();
 
+        //SalaryCheck No2
         Double salary2 = human1.checkSalary();
 
         System.out.println();
@@ -91,16 +91,17 @@ public class Main {
 
         System.out.println();
 
-        //SalaryCheck No2
+        //SalaryCheck No3
         Double salary3 = human1.checkSalary();
 
         System.out.println();
 
+        //SalaryCheck No4
         Double salary4 = human1.checkSalary();
 
         System.out.println();
 
-        //Testing ifCarAvailable setter
+        //Testing 'ifCarAvailable' setter
         car1.value = 15000.0;
         human1.ifCarAvailable(car1);
 
@@ -116,7 +117,7 @@ public class Main {
 
         System.out.println();
 
-        //Testing equals method
+        //Testing 'equals' method
         Car car2 = new LPGCar("Honda","Jazz", 30.0);
         Car car3 = new LPGCar("Honda","Jazz", 30.0);
 
@@ -125,7 +126,7 @@ public class Main {
 
         System.out.println();
 
-        //Testing hashCode method
+        //Testing 'hashCode' method
         Car car4 = new DieselCar("Volkswagen", "Golf", 12345, false);
         Car car5 = new DieselCar("Volkswagen", "Golf", 12345, false);
         Car car6 = new DieselCar("Volkswagen", "Golf", 12347, false);
@@ -134,7 +135,7 @@ public class Main {
 
         System.out.println();
 
-        //Direct printing in console fields of object - executing overridden method toString
+        //Direct printing object fields in console - execution of overridden method 'toString'
         System.out.println(human1);
 
         System.out.println();
@@ -148,6 +149,7 @@ public class Main {
         System.out.println();
 
         //Testing abstract class Device
+
         Device car7 = new DieselCar("Skoda", "Fabia", false);
         car7.turnOn();
         System.out.println(car7);
@@ -174,18 +176,18 @@ public class Main {
 
         System.out.println();
 
-        //Testing interface Soldable and its method sell
+        //Testing interface 'Soldable' and its method 'sell'
         //Creating supplementary objects and setting their fields.
         Human humanselling = new Human();
         humanselling.addCash(10000.0);
         Human humanbuying = new Human();
         humanbuying.addCash(10000.0);
 
-        //Setting dog2 as pet of humanselling
+        //Setting dog2 as 'humanselling' pet
         Animal dog2 = new Pet("pies");
         humanselling.pet = dog2;
 
-        //Printing in console fields of object humanselling and humanbuying
+        //Printing full information about 'humanselling' and 'humanbuying' objects in console before executing 'sell' method
         System.out.println("Dane przed sprzedażą zwierzaka\n");
         System.out.println("Dane sprzedającego:\n");
         System.out.println(humanselling);
@@ -196,7 +198,7 @@ public class Main {
         //Selling dog
         dog2.sell(humanselling, humanbuying, 5000.0);
 
-        //Printing in console fields of object humanselling and humanbuying after executing sell method on dog2 object
+        //Printing full information about 'humanselling' and 'humanbuying' objects in console after executing 'sell' method
         System.out.println("Dane po sprzedaży zwierzaka\n");
         System.out.println("Dane sprzedającego:\n");
         System.out.println(humanselling);
@@ -204,14 +206,14 @@ public class Main {
         System.out.println(humanbuying);
         System.out.println();
 
-        //Creating car9 object and setting it for humanselling object using setter setCar
+        //Creating car9 object and setting it to 'humanselling' object using setter setCar
         Car car9 = new DieselCar("Skoda", "Octavia", false);
         car9.value = 6000.0;
         humanselling.setCar(car9,1);
         car9.addTransaction(new Transaction(humanbuying, humanselling, 4000.0));
         System.out.println("Dane przed sprzedażą auta\n");
 
-        //Printing in console fields of object humanselling and humanbuying
+        //Printing full information about 'humanselling' and 'humanbuying' objects in console before executing 'sell' method
         System.out.println("Dane sprzedającego:\n");
         System.out.println(humanselling);
         System.out.println("Dane kupującego:\n");
@@ -226,9 +228,7 @@ public class Main {
             System.out.println(e);
         }
 
-
-
-        //Printing in console fields of object humanselling and humanbuying after executing sell method
+        //Printing full information about 'humanselling' and 'humanbuying' objects in console after executing 'sell' method
         System.out.println("Dane po sprzedaży auta\n");
         System.out.println("Dane sprzedającego:\n");
         System.out.println(humanselling);
@@ -241,20 +241,20 @@ public class Main {
         Animal swine2 = new FarmAnimal("pyszna swinka");
         FarmAnimal swine3 = new FarmAnimal("pyszna swinka1");
 
-        //Testing method beEaten of interface Edible. It is executed on both objects, but is implemented in inherited class FarmingAnimal
+        //Testing method 'beEaten' of interface 'Edible'. It is executed on both objects, but is implemented in inherited class FarmingAnimal
         //The method cannot be executed objects of abstract class Animal without casting it to inherited class FarmingAnimal
         ((FarmAnimal) swine2).beEaten();
         swine3.beEaten();
 
         System.out.println();
 
-        //Testing method feed without parameter (Defaults Pet = 0.6, Farming Animal = 1.5) on objects of class Animal, Pet and FarmingAnimal
+        //Testing method 'feed' without parameter (Defaults Pet = 0.6, Farming Animal = 1.5) on Pet and FarmingAnimal class objects
         swine1.feed();
         swine2.feed();
 
         System.out.println();
 
-        //Testing method feed with parameter on objects of class Animal, Pet and FarmingAnimal
+        //Testing method 'feed' with parameter on Pet and FarmingAnimal class objects
         swine1.feed(2.0);
         swine2.feed(2.0);
 
@@ -312,6 +312,7 @@ public class Main {
         human4.addCash(10000.0);
         human1.addCash(30000.0);
 
+        //Creating Car class objects
         ElectricCar car13 = new ElectricCar("Renault","Zoe",45.0,true);
         car13.fuelConsumption = 12.0;
         car13.value = 20000.0;
@@ -354,7 +355,7 @@ public class Main {
         car19.yearOfProduction = 2015;
         car19.addTransaction(new Transaction(human1, human4, 4000.0));
 
-        //Testing if possible is setting two cars at the same garage space
+        //Testing if possible is putting two cars on the same garage space
         human4.setCar(car13,0);
         human4.setCar(car13,0);
 
@@ -365,12 +366,12 @@ public class Main {
         human4.setCar(car18,5);
         human4.setCar(car19,6);
 
-        //Test whether is possible place car in out of last index of array garage
+        //Test whether is possible put car outside of last index of 'garage' array
         human4.setCar(car19,9);
 
         System.out.println();
 
-        //Testing summing car values in garage
+        //Testing summation of car values in garage
         human4.sumCarValue();
         human1.sumCarValue();
 
@@ -378,7 +379,7 @@ public class Main {
 
         //Testing new selling method
 
-        //Printing in console fields of object human4 and human1
+        //Printing full information about 'human4' and 'human1'  in console before 'sell' transactions
         System.out.println("Dane sprzedającego:");
         System.out.println(human4);
         System.out.println("Dane kupującego:");
@@ -387,7 +388,7 @@ public class Main {
 
         //Selling car
 
-        //Selling human does not have car12 in garage
+        //Trying to sell car that human does not have
         try {
             car12.sell(human4, human1, 30000.0);
         }
@@ -395,7 +396,7 @@ public class Main {
             System.out.println(e);
         }
 
-        //Buying human does not have appropriate amount of cash
+        //Trying to buy car when buyer does not have enough cash
         try {
             car13.sell(human4, human1, 50000.0);
         }
@@ -403,7 +404,7 @@ public class Main {
             System.out.println(e);
         }
 
-        //Selling human does not own car13
+        //Trying to sell car that human does not have
         try {
             car13.sell(human1, human4, 5000.0);
         }
@@ -411,7 +412,7 @@ public class Main {
             System.out.println(e);
         }
 
-        //Selling too much cars
+        //Trying to sell too much cars
         try {
             car13.sell(human4, human1, 1000.0);
         }
@@ -461,10 +462,9 @@ public class Main {
             System.out.println(e);
         }
 
+        //Printing full information about object 'human4' and 'human1' in console after transaction 'sell'
         System.out.println();
         System.out.println("Dane po sprzedaży aut:\n");
-
-        //Printing in console fields of object human4 and human1 after transactions
         System.out.println("Dane sprzedającego:");
         System.out.println(human4);
         System.out.println("Dane kupującego:");
@@ -472,12 +472,11 @@ public class Main {
         System.out.println();
 
         //Testing sorting
-
         human1.sortCarByYearOfProduction();
         human4.sortCarByYearOfProduction();
 
 
-        //Printing in console fields of object human4 and human1 after sorting
+        //Printing full information about object 'human4' and 'human1' in console after sorting
         System.out.println("Posortowane auta:\n");
         System.out.println("Dane sprzedającego:");
         System.out.println(human4);
@@ -485,11 +484,11 @@ public class Main {
         System.out.println(human1);
         System.out.println();
 
-        //Checking whether human1 was owner of car15
+        //Checking whether human1 was the owner of car15
         System.out.println("Sprawdzenie czy human1 był kiedykolwiek posiadaczem auta car15\n");
         System.out.println(car15.wasCarOwner(human1));
 
-        //Checking whether humanselling was owner of car15
+        //Checking whether humanselling was the owner of car15
         System.out.println("Sprawdzenie czy humanselling był kiedykolwiek posiadaczem auta car15\n");
         System.out.println(car15.wasCarOwner(humanselling));
 
@@ -513,6 +512,154 @@ public class Main {
         System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car6\n");
         System.out.println( ((Car) car6).numberOfTransactions());
 
+        //Testting Application Class
 
+        System.out.println("\nTesty klasy aplikacji\n");
+
+        //Creating objects
+        Application app1 = new Application("Arbuzy", "1.01", 5.0);
+        Application app2 = new Application("Banany", "1.01", 10.0);
+        Application app3 = new Application("Cebulki", "1.01", 0.0);
+        Application app4 = new Application("Dyński", "1.01", 0.0);
+        Application app5 = new Application("Agreściki", "1.01", 15.0);
+        Application app6 = new Application("Ananasy", "1.01", 30000.0);
+
+        //Setting phone3 for human1
+        human1.setPhone(phone3);
+
+        //Printing information about available amount of cash in console before transactions 'sell'
+        System.out.println("Ilość pieniędzy przed zakupami aplikacji: "+human1.cashAvailable());
+
+        //Trying to install an application on phone that owner is not buyer
+        try {
+            phone3.installAnnApp(app1, human4);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        //Trying to install an application that the owner of the phone can not buy due to lack of cash
+        try {
+            phone3.installAnnApp(app6, human1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+
+        //Installing applications
+
+        try {
+            phone3.installAnnApp(app1, human1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        try {
+            phone3.installAnnApp(app2, human1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        try {
+            phone3.installAnnApp(app3, human1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        try {
+            phone3.installAnnApp(app4, human1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        try {
+            phone3.installAnnApp(app5, human1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        //Printing information about available amount of cash in console after transactions
+        System.out.println("Ilość pieniędzy  po zakupach aplikacji: "+human1.cashAvailable());
+
+        //Checking if the application is installed on the phone
+        System.out.println("Czy zainstalowano na telefonie aplikację app1?");
+        System.out.println(phone3.isInstalledApp(app1));
+        System.out.println("Czy zainstalowano na telefonie aplikację app6?");
+        System.out.println(phone3.isInstalledApp(app6));
+        System.out.println("Czy zainstalowano na telefonie aplikację o nazwie Banany?");
+        System.out.println(phone3.isInstalledApp("Banany"));
+        System.out.println("Czy zainstalowano na telefonie aplikację o nazwie Sliwki?");
+        System.out.println(phone3.isInstalledApp("Sliwki"));
+
+        //Printing value of all installed applications
+        phone3.valueOfInstalledApplications();
+
+        //Printing list of all installed free applications
+        phone3.listFreeApp();
+
+        //Printing list of applications in alphabetical order
+        phone3.listInstalledApplicationAlphabetically();
+
+        //Printing list of applications in order of increasing application prices
+        phone3.listInstalledApplicationByAscendingPrices();
+
+        //Testing improved 'sell' method in Phone class
+
+        Phone phone5 = new Phone();
+        Human human5 = new Human();
+        Human human6 = new Human();
+        human5.setPhone(phone5);
+        human6.addCash(10000.0);
+
+        //Printing full information about 'human5' and 'human6' objects in console
+        System.out.println("Testy poprawionej wersji metody sell w klasie Phone");
+        System.out.println(human5+"\n");
+        System.out.println(human6+"\n");
+
+        //Attempt to sell a phone, when buyer does not have enough cash
+        try {
+            phone5.sell(human5, human6, 20000.0);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        //Attempt to sell a phone, that seller does not have
+        try {
+            phone5.sell(human6, human5, 3000.0);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+
+        try {
+            phone5.sell(human5, human6, 3000.0);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        //Printing full information about 'human5' and 'human6' objects in console
+        System.out.println("Dane po zakupach:\n");
+        System.out.println(human5+"\n");
+        System.out.println(human6+"\n");
+
+        //Printing full information about 'human1' object in console
+        System.out.println(human1);
     }
 }

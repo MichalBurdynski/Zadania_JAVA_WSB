@@ -2,7 +2,7 @@ package com.company.devices;
 
 public class LPGCar extends Car {
 
-    private Double capacityLPGTank;
+    private final Double capacityLPGTank;
 
     //Constructors
     public LPGCar(String producer, String model, Double capacityLPGTank) {

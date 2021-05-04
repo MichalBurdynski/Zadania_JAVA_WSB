@@ -10,7 +10,7 @@ public class Pet extends Animal implements Feedable {
     static final Double DEFAULT_FOOD_WEIGHT = 0.6;
 
     /* Implementation of feed method of interface Feedable without parameter.
-    The method took as parameter default amount of food to increase an animal weight. */
+    The method takes as parameter default amount of food to increase an animal weight. */
     public void feed()
     {
         if (this.weight <= 0)
