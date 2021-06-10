@@ -1,8 +1,9 @@
 package com.company;
 
 public class Human {
-    String firstName;
-    String lastName;
-    Animal pet;
-    String phone;
+    public String firstName;
+    public String lastName;
+    public Animal pet;
+    public String phone;
+    public Car ownedCar;
 }

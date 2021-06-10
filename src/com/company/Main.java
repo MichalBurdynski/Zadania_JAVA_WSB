@@ -50,5 +50,13 @@ public class Main {
         crocodile1.takeForAWalk();
         crocodile1.takeForAWalk();
         crocodile1.feed();
+
+        //car1
+        Car car1 = new Car("Tesla", "Model 3");
+        car1.fuelConsumption = 5.5;
+        car1.numberOfPistons = 4;
+
+        //Associating car1 to human1
+        human1.ownedCar = car1;
     }
 }
