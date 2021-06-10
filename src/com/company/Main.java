@@ -58,5 +58,23 @@ public class Main {
 
         //Associating car1 to human1
         human1.ownedCar = car1;
+
+        //Salary Rise No1
+        human1.setSalary(15000.0);
+
+        //SalaryCheck
+        Double salary1 = human1.getSalary();
+        System.out.println("Pierwsze sprawdzenie zarobków: " +salary1);
+        Double salary2 = human1.getSalary();
+        System.out.println("Drugie sprawdzenie zarobków: " +salary2);
+
+        //Salary Rise No2
+        human1.setSalary(25000.0);
+
+        //SalaryCheck No2
+        Double salary3 = human1.getSalary();
+        System.out.println("Trzecie sprawdzenie zarobków: " +salary3);
+        Double salary4 = human1.getSalary();
+        System.out.println("Czwarte sprawdzenie zarobków: " +salary4);
     }
 }
