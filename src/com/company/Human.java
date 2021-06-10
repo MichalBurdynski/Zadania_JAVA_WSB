@@ -1,6 +1,9 @@
 package com.company;
 
+import com.company.devices.Car;
+
 import java.util.Date;
+import java.util.Objects;
 
 public class Human {
     public String firstName;
@@ -45,6 +48,19 @@ public class Human {
         return this.car;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human)) return false;
+        Human human = (Human) o;
+        return firstName.equals(human.firstName) && lastName.equals(human.lastName) && Objects.equals(pet, human.pet) && Objects.equals(phone, human.phone) && Objects.equals(car, human.car) && Objects.equals(salary, human.salary) && Objects.equals(dateOfLastSalaryChecking, human.dateOfLastSalaryChecking) && Objects.equals(previousSalary, human.previousSalary);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, pet, phone, car, salary, dateOfLastSalaryChecking, previousSalary);
+    }
+
     public void setCar(Car car)
     {
         if (this.salary > car.carValue)
@@ -62,5 +78,19 @@ public class Human {
             System.out.println("Auto za drogie. Zmień pracę lub poproś o podwyżkę.");
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Human{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", pet=" + pet +
+                ", phone='" + phone + '\'' +
+                ", car=" + car +
+                ", salary=" + salary +
+                ", dateOfLastSalaryChecking=" + dateOfLastSalaryChecking +
+                ", previousSalary=" + previousSalary +
+                '}';
     }
 }

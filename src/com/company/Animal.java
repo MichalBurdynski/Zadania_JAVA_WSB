@@ -57,4 +57,26 @@ public class Animal {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Animal)) return false;
+        Animal animal = (Animal) o;
+        return species.equals(animal.species) && weight.equals(animal.weight) && name.equals(animal.name) && Objects.equals(pic, animal.pic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(species, weight, name, pic);
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "species='" + species + '\'' +
+                ", weight=" + weight +
+                ", name='" + name + '\'' +
+                ", pic=" + pic +
+                '}';
+    }
 }

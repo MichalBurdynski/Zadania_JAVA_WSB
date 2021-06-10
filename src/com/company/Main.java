@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.devices.Car;
+import com.company.devices.Phone;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -96,6 +99,31 @@ public class Main {
         System.out.println();
 
         //Testing getter 'getCar'
-        Car car2 = human1.getCar();
+        Car car0 = human1.getCar();
+
+        //Car equals method
+        Car car2 = new Car("Honda","Jazz");
+        car2.numberOfPistons = 4;
+        car2.fuelConsumption = 4.5;
+        Car car3 = new Car("Honda","Jazz");
+        car3.numberOfPistons = 4;
+        car3.fuelConsumption = 4.5;
+        System.out.println(car2.equals(car3));
+        System.out.println(new Car("Honda", "Jazz").equals(car3));
+
+        //Direct printing object fields in console - execution of overridden method 'toString'
+        System.out.println(human1);
+        System.out.println();
+        System.out.println(car2);
+        System.out.println();
+        System.out.println(dog1);
+        System.out.println();
+        Phone phone1 = new Phone();
+        phone1.producer = "Apple";
+        phone1.model = "IPhone";
+        phone1.screenSize = 6.0;
+        phone1.phoneOSVersion = "PolarBreak";
+        System.out.println(phone1);
+
     }
 }
