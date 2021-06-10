@@ -57,7 +57,8 @@ public class Main {
         car1.numberOfPistons = 4;
 
         //Associating car1 to human1
-        human1.ownedCar = car1;
+        //commented due to change access modifier to private from public
+        //human1.car = car1;
 
         //Salary Rise No1
         human1.setSalary(15000.0);
@@ -76,5 +77,25 @@ public class Main {
         System.out.println("Trzecie sprawdzenie zarobków: " +salary3);
         Double salary4 = human1.getSalary();
         System.out.println("Czwarte sprawdzenie zarobków: " +salary4);
+
+        //Testing setter 'setCar'
+        System.out.println();
+        car1.carValue = 15000.0;
+        human1.setCar(car1);
+
+        System.out.println();
+
+        car1.carValue = 30000.0;
+        human1.setCar(car1);
+
+        System.out.println();
+
+        car1.carValue = 300000.0;
+        human1.setCar(car1);
+
+        System.out.println();
+
+        //Testing getter 'getCar'
+        Car car2 = human1.getCar();
     }
 }
