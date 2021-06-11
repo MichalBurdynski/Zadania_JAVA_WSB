@@ -55,9 +55,8 @@ public class Main {
         crocodile1.feed();
 
         //car1
-        Car car1 = new Car("Tesla", "Model 3");
-        car1.fuelConsumption = 5.5;
-        car1.numberOfPistons = 4;
+        Car car1 = new Car("Tesla", "Model 3", 2019, 5.5,
+                4, 30000.0);
 
         //Associating car1 to human1
         //commented due to change access modifier to private from public
@@ -102,14 +101,13 @@ public class Main {
         Car car0 = human1.getCar();
 
         //Car equals method
-        Car car2 = new Car("Honda","Jazz");
-        car2.numberOfPistons = 4;
-        car2.fuelConsumption = 4.5;
-        Car car3 = new Car("Honda","Jazz");
-        car3.numberOfPistons = 4;
-        car3.fuelConsumption = 4.5;
+        Car car2 = new Car("Honda","Jazz", 2015, 5.0, 4,
+                10000.0);
+        Car car3 = new Car("Honda","Jazz", 2015, 5.0, 4,
+                10000.0);
         System.out.println(car2.equals(car3));
-        System.out.println(new Car("Honda", "Jazz").equals(car3));
+        System.out.println(new Car("Honda","Jazz", 2015, 5.0, 4,
+                10000.0).equals(car3));
 
         //Direct printing object fields in console - execution of overridden method 'toString'
         System.out.println(human1);
@@ -118,12 +116,13 @@ public class Main {
         System.out.println();
         System.out.println(dog1);
         System.out.println();
-        Phone phone1 = new Phone();
-        phone1.producer = "Apple";
-        phone1.model = "IPhone";
-        phone1.screenSize = 6.0;
-        phone1.phoneOSVersion = "PolarBreak";
+        Phone phone1 = new Phone("Apple", "IPhone", 2020, 6.0, "PolarBreak");
         System.out.println(phone1);
+
+        //Testing turnOn method
+        phone1.turnOn();
+        car3.turnOn();
+        System.out.println();
 
     }
 }

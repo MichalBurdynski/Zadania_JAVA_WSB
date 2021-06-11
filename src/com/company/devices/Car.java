@@ -2,17 +2,17 @@ package com.company.devices;
 
 import java.util.Objects;
 
-public class Car {
-    public final String producer;
-    public final String model;
+public class Car extends Device {
+
     public Double fuelConsumption;
     public Integer numberOfPistons;
     public Double carValue;
 
-    //Constructor with parameters producer and model
-    public Car(String producer, String model) {
-        this.producer = producer;
-        this.model = model;
+    public Car(String producer, String model, Integer yearOfProduction, Double fuelConsumption, Integer numberOfPistons, Double carValue) {
+        super(producer, model, yearOfProduction);
+        this.fuelConsumption = fuelConsumption;
+        this.numberOfPistons = numberOfPistons;
+        this.carValue = carValue;
     }
 
     @Override
@@ -20,22 +20,28 @@ public class Car {
         if (this == o) return true;
         if (!(o instanceof Car)) return false;
         Car car = (Car) o;
-        return producer.equals(car.producer) && model.equals(car.model) && Objects.equals(fuelConsumption, car.fuelConsumption) && Objects.equals(numberOfPistons, car.numberOfPistons) && Objects.equals(carValue, car.carValue);
+        return Objects.equals(fuelConsumption, car.fuelConsumption) && Objects.equals(numberOfPistons, car.numberOfPistons) && Objects.equals(carValue, car.carValue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(producer, model, fuelConsumption, numberOfPistons, carValue);
+        return Objects.hash(fuelConsumption, numberOfPistons, carValue);
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", fuelConsumption=" + fuelConsumption +
+                "fuelConsumption=" + fuelConsumption +
                 ", numberOfPistons=" + numberOfPistons +
                 ", carValue=" + carValue +
+                ", producer='" + producer + '\'' +
+                ", model='" + model + '\'' +
+                ", yearOfProduction=" + yearOfProduction +
                 '}';
+    }
+
+    @Override
+    public void turnOn() {
+        System.out.println("Samochód uruchomiony.");
     }
 }
