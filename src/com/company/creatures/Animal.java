@@ -1,13 +1,15 @@
-package com.company;
+package com.company.creatures;
+
+import com.company.Saleable;
 
 import java.io.File;
 import java.util.Objects;
 
-public class Animal implements Saleable {
+public abstract class Animal implements Saleable, Feedable {
     final String species;
     private Double weight;
-    String name;
-    File pic;
+    public String name;
+    public File pic;
 
     //constant values of animal weight and amount of food its eats
     static final public Double DEFAULT_ANIMAL_WEIGHT = 1.0;
@@ -39,6 +41,19 @@ public class Animal implements Saleable {
         else
         {
             this.weight += 1;
+            System.out.println("Zwierze nakarmione. Masa zwierzęcia wynosi: "+this.weight);
+        }
+    }
+
+    public void feed(double foodWeight)
+    {
+        if (this.weight <= 0)
+        {
+            System.out.println("Zwierze nie żyje");
+        }
+        else
+        {
+            this.weight += foodWeight;
             System.out.println("Zwierze nakarmione. Masa zwierzęcia wynosi: "+this.weight);
         }
     }

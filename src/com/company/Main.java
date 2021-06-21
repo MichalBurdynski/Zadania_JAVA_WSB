@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.creatures.Animal;
+import com.company.creatures.FarmAnimal;
+import com.company.creatures.Human;
+import com.company.creatures.Pet;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
@@ -10,14 +14,14 @@ public class Main {
         Human human1 = new Human();
         human1.firstName = "Andrzej";
         human1.lastName = "Nowak";
-        human1.pet = new Animal("pies");
+        human1.pet = new Pet("pies");
 
         // Creating Animal class objects
-        Animal dog1 = new Animal("pies");
+        Animal dog1 = new Pet("pies");
         dog1.name = "Azorek";
-        Animal cat1 = new Animal("kot");
+        Animal cat1 = new Pet("kot");
         cat1.name = "Puszek";
-        Animal crocodile1 = new Animal("krokodyl");
+        Animal crocodile1 = new Pet("krokodyl");
         crocodile1.name = "Zebus";
 
         //Testing feed and takeForAWalk method
@@ -185,6 +189,23 @@ public class Main {
 
         //Testing if it is possible to sell a human
         human2.sell(human2, human3, 5000.0);
+
+        //Testing 'farmin'' part
+        Animal krowa = new FarmAnimal("krowa");
+        FarmAnimal byk = new FarmAnimal("krowa");
+        Animal kotka = new Pet("kot");
+        Pet kocur = new Pet("kot");
+
+        byk.beEaten();
+
+        byk.feed();
+        byk.feed(50.0);
+
+        kocur.feed();
+        kocur.feed(0.3);
+
+        human3.feed();
+        human3.feed(2.2);
 
     }
 }
