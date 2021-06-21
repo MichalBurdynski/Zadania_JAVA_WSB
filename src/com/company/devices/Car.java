@@ -1,5 +1,7 @@
 package com.company.devices;
 
+import com.company.Human;
+
 import java.util.Objects;
 
 public class Car extends Device {
@@ -43,5 +45,26 @@ public class Car extends Device {
     @Override
     public void turnOn() {
         System.out.println("Samochód uruchomiony.");
+    }
+
+    //Implementation of the sell method of interface Saleable
+    public void sell(Human seller, Human buyer, Double price)
+    {
+        if (seller.getCar() == null)
+        {
+        System.out.println("Sprzedający nie ma samochodu, który próbuje sprzedać.");
+        }
+        else if (buyer.cash < price)
+        {
+            System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
+        }
+        else if (buyer.cash >= price && seller.getCar().equals(this)) {
+            seller.cash += price;
+            buyer.cash -= price;
+            buyer.setCar(this);
+            seller.setCar(null);
+            System.out.println("Samochód sprzedany.");
+        }
+
     }
 }

@@ -1,6 +1,9 @@
 package com.company.devices;
 
-public abstract class Device {
+import com.company.Human;
+import com.company.Saleable;
+
+public abstract class Device implements Saleable {
     public String producer;
     public String model;
     public Integer yearOfProduction;
@@ -22,4 +25,8 @@ public abstract class Device {
 
     //Declaration of an abstract method turnOn
     public abstract void turnOn();
+
+    //Declaration of sell method of interface Saleable
+    public void sell(Human seller, Human buyer, Double price) {
+    }
 }

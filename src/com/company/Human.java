@@ -1,20 +1,27 @@
 package com.company;
 
 import com.company.devices.Car;
+import com.company.devices.Phone;
 
 import java.util.Date;
 import java.util.Objects;
 
-public class Human {
+public class Human extends Animal{
+    public static final String DEFAULT_HUMAN_SPECIES = "Homo sapiens sapiens";
     public String firstName;
     public String lastName;
     public Animal pet;
-    public String phone;
+    public Phone phone;
     private Car car;
-
-    private Double salary;
+    private Double salary = 0.0;
+    public Double cash = 0.0;
 
     private Date dateOfLastSalaryChecking;
+
+    public Human() {
+        super(DEFAULT_HUMAN_SPECIES);
+    }
+
     private Double previousSalary;
 
     public Double getSalary()
@@ -63,7 +70,11 @@ public class Human {
 
     public void setCar(Car car)
     {
-        if (this.salary > car.carValue)
+        if (car == null)
+        {
+            this.car = null;
+        }
+        else if (this.salary > car.carValue)
         {
             System.out.println("Samochód kupiony za gotówkę.");
             this.car = car;
@@ -83,12 +94,15 @@ public class Human {
     @Override
     public String toString() {
         return "Human{" +
-                "firstName='" + firstName + '\'' +
+                "species='" + species + '\'' +
+                ", pic=" + pic +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", pet=" + pet +
-                ", phone='" + phone + '\'' +
+                ", phone=" + phone +
                 ", car=" + car +
                 ", salary=" + salary +
+                ", cash=" + cash +
                 ", dateOfLastSalaryChecking=" + dateOfLastSalaryChecking +
                 ", previousSalary=" + previousSalary +
                 '}';

@@ -3,7 +3,7 @@ package com.company;
 import java.io.File;
 import java.util.Objects;
 
-public class Animal {
+public class Animal implements Saleable {
     final String species;
     private Double weight;
     String name;
@@ -78,5 +78,26 @@ public class Animal {
                 ", name='" + name + '\'' +
                 ", pic=" + pic +
                 '}';
+    }
+
+    //Implementation sell method of interface Saleable
+    public void sell(Human seller, Human buyer, Double price)
+    {
+        if (this instanceof Human)
+        {
+            System.out.println("Nie wolno sprzedać człowieka!!!");
+        }
+        else if (seller.pet == null)
+            System.out.println("Sprzedający nie ma zwierzęcia, które próbuje sprzedać.");
+        else if (buyer.cash < price)
+            System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
+        else if (seller.pet.equals(this) && buyer.cash >= price) {
+            seller.cash = seller.cash + price;
+            buyer.cash = buyer.cash - price;
+            buyer.pet = seller.pet;
+            seller.pet = null;
+            System.out.println("Zwierze sprzedane.");
+        }
+
     }
 }

@@ -11,7 +11,6 @@ public class Main {
         human1.firstName = "Andrzej";
         human1.lastName = "Nowak";
         human1.pet = new Animal("pies");
-        human1.phone = "Iphone";
 
         // Creating Animal class objects
         Animal dog1 = new Animal("pies");
@@ -123,6 +122,69 @@ public class Main {
         phone1.turnOn();
         car3.turnOn();
         System.out.println();
+
+        //Testing sell method in the Saleable interface
+
+        //Car
+
+        //Human2 - seller, human3 - buyer
+        Human human2 = new Human();
+        Human human3 = new Human();
+        human2.setSalary(15000.0);
+        human3.setSalary(15000.0);
+        human3.cash = 10000.0;
+        human2.setCar(car2);
+
+        //Printing out information about human2 i human3 before transaction of selling
+        System.out.println(human2);
+        System.out.println(human3);
+
+        car2.sell(human2, human3, 100000.0);
+        car2.sell(human3, human2, 10000.0);
+        car2.sell(human2, human3, 8500.0);
+
+        //Printing out information about human2 i human3 after the transaction of selling
+        System.out.println(human2);
+        System.out.println(human3);
+
+        //Phone
+
+        //Human2 - seller, human3 - buyer
+        human3.cash = 10000.0;
+        human2.phone = phone1;
+
+        //Printing out information about human2 i human3 before transaction of selling
+        System.out.println(human2);
+        System.out.println(human3);
+
+        phone1.sell(human2, human3, 100000.0);
+        phone1.sell(human3, human2, 10000.0);
+        phone1.sell(human2, human3, 8500.0);
+
+        //Printing out information about human2 i human3 after the transaction of selling
+        System.out.println(human2);
+        System.out.println(human3);
+
+        //Animal
+
+        //Human2 - seller, human3 - buyer
+        human3.cash = 10000.0;
+        human2.pet = dog1;
+
+        //Printing out information about human2 i human3 before transaction of selling
+        System.out.println(human2);
+        System.out.println(human3);
+
+        dog1.sell(human2, human3, 100000.0);
+        dog1.sell(human3, human2, 10000.0);
+        dog1.sell(human2, human3, 8500.0);
+
+        //Printing out information about human2 i human3 after the transaction of selling
+        System.out.println(human2);
+        System.out.println(human3);
+
+        //Testing if it is possible to sell a human
+        human2.sell(human2, human3, 5000.0);
 
     }
 }
