@@ -4,8 +4,11 @@ import com.company.creatures.Animal;
 import com.company.creatures.FarmAnimal;
 import com.company.creatures.Human;
 import com.company.creatures.Pet;
-import com.company.devices.Car;
-import com.company.devices.Phone;
+import com.company.devices.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -58,8 +61,8 @@ public class Main {
         crocodile1.feed();
 
         //car1
-        Car car1 = new Car("Tesla", "Model 3", 2019, 5.5,
-                4, 30000.0);
+        Car car1 = new Electric("Tesla", "Model 3", 2019, 12.5,
+                30000.0, 47.5, true);
 
         //Associating car1 to human1
         //commented due to change access modifier to private from public
@@ -104,13 +107,13 @@ public class Main {
         Car car0 = human1.getCar();
 
         //Car equals method
-        Car car2 = new Car("Honda","Jazz", 2015, 5.0, 4,
-                10000.0);
-        Car car3 = new Car("Honda","Jazz", 2015, 5.0, 4,
-                10000.0);
+        Car car2 = new LPG("Honda","Jazz", 2015, 5.0, 10000.0,
+                36.0);
+        Car car3 = new LPG("Honda","Jazz", 2015, 5.0, 10000.0,
+                36.0);
         System.out.println(car2.equals(car3));
-        System.out.println(new Car("Honda","Jazz", 2015, 5.0, 4,
-                10000.0).equals(car3));
+        System.out.println(new LPG("Honda","Jazz", 2015, 5.0, 10000.0,
+                36.0).equals(car3));
 
         //Direct printing object fields in console - execution of overridden method 'toString'
         System.out.println(human1);
@@ -206,6 +209,49 @@ public class Main {
 
         human3.feed();
         human3.feed(2.2);
+
+        //Testing overloading method installAnnApp
+        //Creating phone for a test
+        Phone phone3 = new Phone("Apple","IPhone", 2019, 6.0, "5.03");
+
+        //Overloading installAnnApp method with different parameters
+        phone3.installAnnApp("Soccer Manager");
+        phone3.installAnnApp("Soccer Manager", "15.0");
+        phone3.installAnnApp("Soccer Manager", "15.0", "https://google.com/SoccerManager.jar");
+        ArrayList<String> applicationList = new ArrayList<>();
+        applicationList.add("Soccer Manager");
+        applicationList.add("Car Race");
+        applicationList.add("City Builder");
+        applicationList.add("Messenger Call");
+        phone3.installAnnApp(applicationList);
+        try {
+            URL url1 = new URL("https", "www.wp.pl", "wp.exe");
+            phone3.installAnnApp(url1);
+        } catch (MalformedURLException e) { System.out.println("Nie ma takiego serwera z taką aplikacją");
+        }
+        try {
+            URL url2 = null;
+            phone3.installAnnApp(url2);
+        } catch (MalformedURLException e) { System.out.println("Nie ma takiego serwera z taką aplikacją");
+        }
+        try {
+            URL url3 = new URL(Phone.DEFAULT_PROTOCOL, Phone.DEFAULT_SERVER_ADDRESS, Phone.DEFAULT_FILENAME);
+            phone3.installAnnApp(url3);
+        }
+        catch (MalformedURLException e)
+        {
+            System.out.println("Nie ma takiego serwera z taką aplikacją");
+        }
+
+        System.out.println();
+
+        //Testing method refuel
+        Car car10 = new Electric("Tesla", "Model 5", 2019, 15.0,15000.0, 45.0, true);
+        Car car11 = new Disel("Ford", "Mondeo", 2019, 5.5, 10000.0,true);
+        Car car12 = new LPG("Renault", "Clio",2015, 6.2, 15000.0,36.0);
+        car10.refuel();
+        car11.refuel();
+        car12.refuel();
 
     }
 }
