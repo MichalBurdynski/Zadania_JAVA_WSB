@@ -18,6 +18,7 @@ public class Phone extends Device {
                 "producer='" + producer + '\'' +
                 ", model='" + model + '\'' +
                 ", yearOfProduction=" + yearOfProduction +
+                ", value=" + value +
                 ", screenSize=" + screenSize +
                 ", phoneOSVersion='" + phoneOSVersion + '\'' +
                 '}';
@@ -36,8 +37,8 @@ public class Phone extends Device {
         return Objects.hash(screenSize, phoneOSVersion);
     }
 
-    public Phone(String producer, String model, Integer yearOfProduction, Double screenSize, String phoneOSVersion) {
-        super(producer, model, yearOfProduction);
+    public Phone(String producer, String model, Integer yearOfProduction, Double value, Double screenSize, String phoneOSVersion) {
+        super(producer, model, yearOfProduction, value);
         this.screenSize = screenSize;
         this.phoneOSVersion = phoneOSVersion;
     }
