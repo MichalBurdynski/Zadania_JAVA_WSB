@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public abstract class Animal implements Saleable, Feedable {
     final String species;
-    private Double weight;
+    protected Double weight;
     public String name;
     public File pic;
 

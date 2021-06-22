@@ -16,6 +16,7 @@ public class FarmAnimal extends Animal implements Edible{
     public void beEaten()
     {
         System.out.println("Zwierze przygotowane do zjedzenia.");
+        this.weight = 0.0;
         System.out.println("Zwierze zjedzone.");
     }
 
