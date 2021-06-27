@@ -1,5 +1,7 @@
 package com.company.devices;
 
+import java.util.Objects;
+
 public class Disel extends Car{
 
     public Boolean hasDieselParticulateFilter;
@@ -9,8 +11,8 @@ public class Disel extends Car{
         System.out.println("Auto zatankowane do pełna olejem napędowym.");
     }
 
-    public Disel(String producer, String model, Integer yearOfProduction, Double fuelConsumption, Double carValue, Boolean hasDieselParticulateFilter) {
-        super(producer, model, yearOfProduction, fuelConsumption, carValue);
+    public Disel(String producer, String model, Integer yearOfProduction, Double value, Double fuelConsumption, Boolean hasDieselParticulateFilter) {
+        super(producer, model, yearOfProduction, value, fuelConsumption);
         this.hasDieselParticulateFilter = hasDieselParticulateFilter;
     }
 
@@ -18,11 +20,25 @@ public class Disel extends Car{
     public String toString() {
         return "Disel{" +
                 "fuelConsumption=" + fuelConsumption +
-                ", carValue=" + carValue +
                 ", producer='" + producer + '\'' +
                 ", model='" + model + '\'' +
                 ", yearOfProduction=" + yearOfProduction +
+                ", value=" + value +
                 ", hasDieselParticulateFilter=" + hasDieselParticulateFilter +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Disel)) return false;
+        if (!super.equals(o)) return false;
+        Disel disel = (Disel) o;
+        return Objects.equals(hasDieselParticulateFilter, disel.hasDieselParticulateFilter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), hasDieselParticulateFilter);
     }
 }

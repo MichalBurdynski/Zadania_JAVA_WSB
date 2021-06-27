@@ -88,23 +88,23 @@ public class Main {
 
         //Testing setter 'setCar'
         System.out.println();
-        car1.carValue = 15000.0;
-        human1.setCar(car1);
+        car1.value = 15000.0;
+        human1.setCar(car1,0);
 
         System.out.println();
 
-        car1.carValue = 30000.0;
-        human1.setCar(car1);
+        car1.value = 30000.0;
+        human1.setCar(car1,0);
 
         System.out.println();
 
-        car1.carValue = 300000.0;
-        human1.setCar(car1);
+        car1.value = 300000.0;
+        human1.setCar(car1,0);
 
         System.out.println();
 
         //Testing getter 'getCar'
-        Car car0 = human1.getCar();
+        Car car0 = human1.getCar(0);
 
         //Car equals method
         Car car2 = new LPG("Honda","Jazz", 2015, 5.0, 10000.0,
@@ -122,7 +122,7 @@ public class Main {
         System.out.println();
         System.out.println(dog1);
         System.out.println();
-        Phone phone1 = new Phone("Apple", "IPhone", 2020, 6.0, "PolarBreak");
+        Phone phone1 = new Phone("Apple", "IPhone", 2020, 4500.0,6.0, "PolarBreak");
         System.out.println(phone1);
 
         //Testing turnOn method
@@ -137,18 +137,37 @@ public class Main {
         //Human2 - seller, human3 - buyer
         Human human2 = new Human();
         Human human3 = new Human();
-        human2.setSalary(15000.0);
-        human3.setSalary(15000.0);
+        human2.setSalary(25000.0);
+        human3.setSalary(25000.0);
         human3.cash = 10000.0;
-        human2.setCar(car2);
+        human2.setCar(car2,1);
 
         //Printing out information about human2 i human3 before transaction of selling
         System.out.println(human2);
         System.out.println(human3);
 
-        car2.sell(human2, human3, 100000.0);
+        try {
+            car2.sell(human2, human3, 100000.0);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        try {
         car2.sell(human3, human2, 10000.0);
+        }
+        catch (Exception e)
+        {
+        e.printStackTrace();
+        }
+        try{
         car2.sell(human2, human3, 8500.0);
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         //Printing out information about human2 i human3 after the transaction of selling
         System.out.println(human2);
@@ -212,12 +231,12 @@ public class Main {
 
         //Testing overloading method installAnnApp
         //Creating phone for a test
-        Phone phone3 = new Phone("Apple","IPhone", 2019, 6.0, "5.03");
+        Phone phone3 = new Phone("Apple","IPhone", 2019, 2500.0, 6.0, "5.03");
 
         //Overloading installAnnApp method with different parameters
         phone3.installAnnApp("Soccer Manager");
         phone3.installAnnApp("Soccer Manager", "15.0");
-        phone3.installAnnApp("Soccer Manager", "15.0", "google.com");
+        phone3.installAnnApp("Soccer Manager", "15.0", "https://google.com/SoccerManager.jar");
         ArrayList<String> applicationList = new ArrayList<>();
         applicationList.add("Soccer Manager");
         applicationList.add("Car Race");
@@ -227,7 +246,13 @@ public class Main {
         try {
             URL url1 = new URL("https", "www.wp.pl", "wp.exe");
             phone3.installAnnApp(url1);
-        } catch (MalformedURLException e) { System.out.println("Nie ma takiego serwera z taką aplikacją");
+        } catch (MalformedURLException e) { System.out.println("Błędny URL.");
+        }
+        try {
+            URL url2 = null;
+            phone3.installAnnApp(url2);
+        } catch (MalformedURLException e) {
+            System.out.println("Błędny URL.");
         }
         try {
             URL url3 = new URL(Phone.DEFAULT_PROTOCOL, Phone.DEFAULT_SERVER_ADDRESS, Phone.DEFAULT_FILENAME);
@@ -235,7 +260,7 @@ public class Main {
         }
         catch (MalformedURLException e)
         {
-            System.out.println("Nie ma takiego serwera z taką aplikacją");
+            System.out.println("Błędny URL.");
         }
 
         System.out.println();
@@ -248,5 +273,164 @@ public class Main {
         car11.refuel();
         car12.refuel();
 
+        System.out.println("Test garażu");
+
+        //Testing garage functions
+
+        //Executing constructor with parameter garageCapacity
+        Human human4 = new Human(8);
+        human4.setSalary(35000.0);
+        human4.cash = 10000.0;
+        human1.cash = 30000.0;
+
+        //Creating Car class objects
+        Electric car13 = new Electric("Renault","Zoe",2018,20000.0,12.0, 45.0, true);
+        Electric car14 = new Electric("Renault","Clio",2017,25000.0,12.0, 45.0, true);
+        Electric car15 = new Electric("Renault","Kadjar",2021,17000.0,15.0, 60.0, false);
+        Electric car16 = new Electric("Renault","Kadjar",2019,17000.0,15.0, 60.0, false);
+        Electric car17 = new Electric("Renault","Kadjar",2020,17000.0,15.0, 60.0, false);
+        Electric car18 = new Electric("Renault","Kadjar",2016,17000.0,15.0, 60.0, false);
+        Electric car19 = new Electric("Renault","Kadjar",2015,17000.0,15.0, 60.0, false);
+
+        //Testing if possible is putting two cars on the same garage space
+        human4.setCar(car13,0);
+        human4.setCar(car13,0);
+
+        human4.setCar(car14,1);
+        human4.setCar(car15,2);
+        human4.setCar(car16,3);
+        human4.setCar(car17,4);
+        human4.setCar(car18,5);
+        human4.setCar(car19,6);
+
+        //Test whether is possible put car outside of last index of 'garage' array
+        human4.setCar(car19,9);
+
+        System.out.println();
+
+        //Testing summation of car values in garage
+        human4.sumCarValue();
+        human1.sumCarValue();
+
+        System.out.println();
+
+        //Testing new selling method
+
+        //Printing full information about 'human4' and 'human1'  in console before 'sell' transactions
+        System.out.println("Dane sprzedającego:");
+        System.out.println(human4);
+        System.out.println("Dane kupującego:");
+        System.out.println(human1);
+        System.out.println();
+
+        //Selling car
+
+        //Trying to sell car that human does not have
+        try {
+            car12.sell(human4, human1, 30000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //Trying to buy car when buyer does not have enough cash
+        try {
+            car13.sell(human4, human1, 50000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //Trying to sell car that human does not have
+        try {
+            car13.sell(human1, human4, 5000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //Trying to sell too much cars
+        try {
+            car13.sell(human4, human1, 1000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            car14.sell(human4, human1, 1000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            car15.sell(human4, human1, 2000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            car16.sell(human4, human1, 3000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            car17.sell(human4, human1, 2000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            car18.sell(human4, human1, 1000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            car19.sell(human4, human1, 1000.0);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //Printing full information about object 'human4' and 'human1' in console after transaction 'sell'
+        System.out.println();
+        System.out.println("Dane po sprzedaży aut:\n");
+        System.out.println("Dane sprzedającego:");
+        System.out.println(human4);
+        System.out.println("Dane kupującego:");
+        System.out.println(human1);
+        System.out.println();
+
+        //Testing sorting
+        try {
+            human1.sortCarByYearOfProduction();
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Nie można postortować pustej tablicy.");
+        }
+        try {
+            human4.sortCarByYearOfProduction();
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Nie można posortować pustej tablicy.");
+        }
+
+
+        //Printing full information about object 'human4' and 'human1' in console after sorting
+        System.out.println("Posortowane auta:\n");
+        System.out.println("Dane sprzedającego:");
+        System.out.println(human4);
+        System.out.println("Dane kupującego:");
+        System.out.println(human1);
+        System.out.println();
     }
 }
