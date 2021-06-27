@@ -217,7 +217,7 @@ public class Main {
         //Overloading installAnnApp method with different parameters
         phone3.installAnnApp("Soccer Manager");
         phone3.installAnnApp("Soccer Manager", "15.0");
-        phone3.installAnnApp("Soccer Manager", "15.0", "https://google.com/SoccerManager.jar");
+        phone3.installAnnApp("Soccer Manager", "15.0", "google.com");
         ArrayList<String> applicationList = new ArrayList<>();
         applicationList.add("Soccer Manager");
         applicationList.add("Car Race");
@@ -227,11 +227,6 @@ public class Main {
         try {
             URL url1 = new URL("https", "www.wp.pl", "wp.exe");
             phone3.installAnnApp(url1);
-        } catch (MalformedURLException e) { System.out.println("Nie ma takiego serwera z taką aplikacją");
-        }
-        try {
-            URL url2 = null;
-            phone3.installAnnApp(url2);
         } catch (MalformedURLException e) { System.out.println("Nie ma takiego serwera z taką aplikacją");
         }
         try {

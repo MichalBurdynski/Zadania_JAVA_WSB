@@ -70,26 +70,33 @@ public class Phone extends Device {
     //Implementation of method installAnnApp with parameter appName
     public void installAnnApp(String appName)
     {
-        System.out.println("Zainstalowano aplikację o nazwie: "+appName);
+        this.installAnnApp(appName, DEFAULT_APP_VERSION);
     }
 
     //Implementation of methodinstallAnnApp with parameter appName and appVersion
-    public void installAnnApp(String appName, String appVersion)
-    {
-        System.out.println("Zainstalowano aplikację o nazwie: "+ appName +" w wersji: " + appVersion);
+    public void installAnnApp(String appName, String appVersion) {
+        this.installAnnApp(appName, appVersion, DEFAULT_SERVER_ADDRESS);
     }
 
     //Implementation of method installAnnApp with parameter appName, appVersion and serverAddress
     public void installAnnApp(String appName, String appVersion, String serverAddress)
     {
-        System.out.println("Zainstalowano aplikację o nazwie: "+appName + " w wersji: " + appVersion + " z serwera o adresie: " + serverAddress);
+        URL url;
+        try {
+            url = new URL(DEFAULT_PROTOCOL, serverAddress, DEFAULT_PORT, appName + "-" + appVersion);
+            this.installAnnApp(url);
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     //Implementation of method installAnnApp with parameter appList
     public void installAnnApp(ArrayList<String> appList)
     {
         for (String s : appList) {
-            System.out.println("Zainstalowano aplikację o nazwie: " + s);
+            this.installAnnApp(s);
         }
     }
 
@@ -99,18 +106,12 @@ public class Phone extends Device {
     public static final String DEFAULT_PROTOCOL = "https";
     public static final String DEFAULT_SERVER_ADDRESS = "www.google.com";
     public static final String DEFAULT_FILENAME = "app.jar";
+    public static final String DEFAULT_APP_VERSION = "10.5";
+    public static final Integer DEFAULT_PORT = 8080;
 
     //When URL is null method uses default values
-    public void installAnnApp(URL specificAppURL) throws MalformedURLException {
-        if (specificAppURL == null)
-        {
-            System.out.println("Nie podano prawidłowego adresu serwera z aplikacjami.");
-            System.out.println("Zostanie zainstalowana aplikacja z domyślnego serwera.");
-            URL newURL = new URL(DEFAULT_PROTOCOL, DEFAULT_SERVER_ADDRESS, DEFAULT_FILENAME);
-            installAnnApp(newURL);
-        }
-        else {
-            System.out.println("Zainstalowano aplikację o nazwie: " + specificAppURL.getFile() + " z serwera o adresie: " + specificAppURL.getHost());
-        }
+    public void installAnnApp(URL url)  {
+        System.out.println("Próbuję pobrać aplikację.");
+        System.out.println("Zainstalowano aplikację o nazwie: " + url.getFile() + " z serwera o adresie: " + url.getHost());
     }
 }
