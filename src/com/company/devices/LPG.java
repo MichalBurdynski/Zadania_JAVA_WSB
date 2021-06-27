@@ -19,13 +19,8 @@ public class LPG extends Car {
     @Override
     public String toString() {
         return "LPG{" +
-                "fuelConsumption=" + fuelConsumption +
-                ", producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", yearOfProduction=" + yearOfProduction +
-                ", value=" + value +
-                ", capacityLPGTank=" + capacityLPGTank +
-                '}';
+                "capacityLPGTank=" + capacityLPGTank +
+                "} " + super.toString();
     }
 
     @Override

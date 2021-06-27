@@ -103,8 +103,7 @@ public class Human extends Animal{
         else
         {
             System.out.println("Nie udało się wprowadzić samochodu na miejsce: "+garageSpaceNumber);
-            System.out.println("W tym miejscu jest już auto:");
-            System.out.println(garage[garageSpaceNumber]);
+            System.out.println("W tym miejscu jest już auto.");
         }
     }
 
@@ -147,17 +146,31 @@ public class Human extends Animal{
 
     @Override
     public String toString() {
+        //Printing details of cars, that are stored in garage
+        StringBuilder cars = new StringBuilder();
+        for (int i = 0; i < garage.length; i++)
+        {
+            if (garage[i] != null)
+            {
+                cars.append("Auto nr: ").append(i).append('\n').append(garage[i]).append('\n');
+            }
+        }
+        if (cars.toString().equals(""))
+        {
+            cars = new StringBuilder("Nie posiada auta.\n");
+        }
+
         return "Human{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", pet=" + pet +
                 ", phone=" + phone +
-                ", garage=" + Arrays.toString(garage) +
+                ", garage=" + cars+
                 ", garageCapacity=" + garageCapacity +
                 ", salary=" + salary +
                 ", cash=" + cash +
                 ", dateOfLastSalaryChecking=" + dateOfLastSalaryChecking +
                 ", previousSalary=" + previousSalary +
-                '}';
+                "} ";
     }
 }

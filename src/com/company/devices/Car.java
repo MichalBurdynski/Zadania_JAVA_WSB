@@ -2,15 +2,18 @@ package com.company.devices;
 
 import com.company.creatures.Human;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class Car extends Device {
 
     public Double fuelConsumption;
+    public final ArrayList<Transaction> ownerList;
 
     public Car(String producer, String model, Integer yearOfProduction, Double value, Double fuelConsumption) {
         super(producer, model, yearOfProduction, value);
         this.fuelConsumption = fuelConsumption;
+        this.ownerList = new ArrayList<>();
     }
 
     @Override
@@ -30,11 +33,8 @@ public abstract class Car extends Device {
     public String toString() {
         return "Car{" +
                 "fuelConsumption=" + fuelConsumption +
-                ", producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", yearOfProduction=" + yearOfProduction +
-                ", value=" + value +
-                '}';
+                ", ownerList=" + ownerList +
+                "} " + super.toString();
     }
 
     @Override
@@ -48,23 +48,30 @@ public abstract class Car extends Device {
         int carPositionInGarage = 0;
         boolean isOwner = false;
         int freeGarageSpaces = 0;
-        //Checking if seller has an item to sell
-        try
-        {
+        //Checking if seller has an item to sell and is the owner
+        try {
+            for (int i = 0; i < seller.garageCapacity; i++) {
+                Car transactionItem = seller.getCar(i);
+                int lastIndexOfTransaction;
+                if (transactionItem != null) {
+                    if (transactionItem.ownerList.size() == 0) {
+                        throw new Exception("Auto nie ma własciciela.");
+                    } else {
+                        lastIndexOfTransaction = transactionItem.ownerList.size() - 1;
+                    }
+                    Human carLastOwner = transactionItem.ownerList.get(lastIndexOfTransaction).getDeviceOwner();
 
-        for (int i = 0; i < seller.garageCapacity ; i++)
-        {
-            if (this.equals(seller.getCar(i)))
-            {
-                isOwner = true;
-                carPositionInGarage = i;
-                break;
+                    if (this.equals(transactionItem) && carLastOwner == seller) {
+                        isOwner = true;
+                        carPositionInGarage = i;
+                        break;
+                    }
+                }
             }
-        }
-           if (!isOwner)
-           {
-               throw new Exception();
-           }
+
+            if (!isOwner) {
+                throw new Exception();
+            }
         }
         catch (Exception e)
         {
@@ -120,6 +127,8 @@ public abstract class Car extends Device {
             buyer.cash -= price;
             buyer.setCar(this, newCarPositionInGarage);
             seller.setCar(null, carPositionInGarage);
+            Transaction transaction = new Transaction(seller, buyer, price);
+            this.ownerList.add(transaction);
             System.out.println("Samochód sprzedany.");
         }
     }
@@ -127,5 +136,36 @@ public abstract class Car extends Device {
     //Declaration of abstract method refuel
     public abstract void refuel();
 
+    //Method checking whether a man owned the car
+    public boolean wasCarOwner(Human human)
+    {
+        boolean wasCarOwner = false;
+        for (Transaction checkedTransaction : this.ownerList) {
+            if (checkedTransaction.getDeviceOwner() == human || checkedTransaction.getDevicePreviousOwner() == human) {
+                wasCarOwner = true;
+                break;
+            }
+        }
 
+        return wasCarOwner;
+    }
+
+    //Method checking whether humanA sold a car to humanB
+    public boolean wasCarSold(Human humanA, Human humanB)
+    {
+        boolean wasCarSold = false;
+        for (Transaction checkedTransaction : this.ownerList) {
+            if (checkedTransaction.getDeviceOwner() == humanB && checkedTransaction.getDevicePreviousOwner() == humanA) {
+                wasCarSold = true;
+                break;
+            }
+        }
+        return wasCarSold;
+    }
+
+    //Method returning number of car sales transactions
+    public Integer getNumberOfTransactions()
+    {
+        return this.ownerList.size();
+    }
 }

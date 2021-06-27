@@ -11,8 +11,7 @@ public abstract class Device implements Saleable {
 
     @Override
     public String toString() {
-        return "Device{" +
-                "producer='" + producer + '\'' +
+        return  "producer='" + producer + '\'' +
                 ", model='" + model + '\'' +
                 ", yearOfProduction=" + yearOfProduction +
                 ", value=" + value +
@@ -30,6 +29,6 @@ public abstract class Device implements Saleable {
     public abstract void turnOn();
 
     //Declaration of sell method of interface Saleable
-    public void sell(Human seller, Human buyer, Double price) throws Exception {
+    public void sell(Human seller, Human buyer, Double price) {
     }
 }

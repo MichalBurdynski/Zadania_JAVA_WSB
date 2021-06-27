@@ -30,14 +30,9 @@ public class Electric extends Car {
     @Override
     public String toString() {
         return "Electric{" +
-                "fuelConsumption=" + fuelConsumption +
-                ", producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", yearOfProduction=" + yearOfProduction +
-                ", value=" + value +
-                ", batteryCapacity=" + batteryCapacity +
+                "batteryCapacity=" + batteryCapacity +
                 ", hasCharger=" + hasCharger +
-                '}';
+                "} " + super.toString();
     }
 
     //Implementation abstract method refuel

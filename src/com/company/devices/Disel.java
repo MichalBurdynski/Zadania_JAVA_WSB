@@ -19,13 +19,8 @@ public class Disel extends Car{
     @Override
     public String toString() {
         return "Disel{" +
-                "fuelConsumption=" + fuelConsumption +
-                ", producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", yearOfProduction=" + yearOfProduction +
-                ", value=" + value +
-                ", hasDieselParticulateFilter=" + hasDieselParticulateFilter +
-                '}';
+                "hasDieselParticulateFilter=" + hasDieselParticulateFilter +
+                "} " + super.toString();
     }
 
     @Override

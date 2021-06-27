@@ -254,6 +254,8 @@ public class Main {
 
         //Executing constructor with parameter garageCapacity
         Human human4 = new Human(8);
+        human4.firstName = "Adam";
+        human4.lastName = "Kowalski";
         human4.setSalary(35000.0);
         human4.cash = 10000.0;
         human1.cash = 30000.0;
@@ -266,6 +268,15 @@ public class Main {
         Electric car17 = new Electric("Renault","Kadjar",2020,17000.0,15.0, 60.0, false);
         Electric car18 = new Electric("Renault","Kadjar",2016,17000.0,15.0, 60.0, false);
         Electric car19 = new Electric("Renault","Kadjar",2015,17000.0,15.0, 60.0, false);
+        car13.ownerList.add(new Transaction(human1, human4, 4000.0));
+        car14.ownerList.add(new Transaction(human1, human4, 4000.0));
+        car15.ownerList.add(new Transaction(human1, human4, 4000.0));
+        car16.ownerList.add(new Transaction(human1, human4, 4000.0));
+        car17.ownerList.add(new Transaction(human1, human4, 4000.0));
+        car18.ownerList.add(new Transaction(human1, human4, 4000.0));
+        car19.ownerList.add(new Transaction(human1, human4, 4000.0));
+
+
 
         //Testing if possible is putting two cars on the same garage space
         human4.setCar(car13,0);
@@ -339,5 +350,33 @@ public class Main {
         System.out.println("Dane kupującego:");
         System.out.println(human1);
         System.out.println();
+
+        //Checking whether human1 was the owner of car15
+        System.out.println("Sprawdzenie czy human1 był kiedykolwiek posiadaczem auta car19\n");
+        System.out.println(car19.wasCarOwner(human1));
+
+        //Checking whether humanselling was the owner of car15
+        System.out.println("Sprawdzenie czy human4 był kiedykolwiek posiadaczem auta car19\n");
+        System.out.println(car19.wasCarOwner(human4));
+
+        //Checking whether human1 sold car15 to human4
+        System.out.println("Sprawdzenie czy human1 kiedykolwiek sprzedał human4 auto car15\n");
+        System.out.println(car15.wasCarSold(human1, human4));
+
+        //Checking whether human4 sold car15 to humanbuying
+        System.out.println("Sprawdzenie czy human4 kiedykolwiek sprzedał human1 auto car3\n");
+        System.out.println(car3.wasCarSold(human4, human1));
+
+        //Checking number of sales transaction of car15
+        System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car15\n");
+        System.out.println(car15.getNumberOfTransactions());
+
+        //Checking number of sales transaction of car7
+        System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car14\n");
+        System.out.println( (car14).getNumberOfTransactions());
+
+        //Checking number of sales transaction of car8
+        System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car3\n");
+        System.out.println( (car3).getNumberOfTransactions());
     }
 }
