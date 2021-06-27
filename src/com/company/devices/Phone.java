@@ -4,25 +4,14 @@ import com.company.creatures.Human;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 public class Phone extends Device {
 
     public Double screenSize;
     public String phoneOSVersion;
 
-    @Override
-    public String toString() {
-        return "Phone{" +
-                "producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", yearOfProduction=" + yearOfProduction +
-                ", value=" + value +
-                ", screenSize=" + screenSize +
-                ", phoneOSVersion='" + phoneOSVersion + '\'' +
-                '}';
-    }
+    Set<Application> applicationSet;
 
     @Override
     public boolean equals(Object o) {
@@ -41,6 +30,7 @@ public class Phone extends Device {
         super(producer, model, yearOfProduction, value);
         this.screenSize = screenSize;
         this.phoneOSVersion = phoneOSVersion;
+        this.applicationSet = new HashSet<>();
     }
 
     @Override
@@ -51,7 +41,7 @@ public class Phone extends Device {
     //Implementation of the sell method of interface Saleable
     public void sell(Human seller, Human buyer, Double price)
     {
-        if (seller.phone == null)
+        if (seller.getPhone() == null)
         {
         System.out.println("Sprzedający nie ma telefonu, który próbuje sprzedać.");
         }
@@ -59,11 +49,11 @@ public class Phone extends Device {
         {
         System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
         }
-        else if (buyer.cash >= price && seller.phone.equals(this)) {
+        else if (buyer.cash >= price && seller.getPhone().equals(this)) {
             seller.cash += price;
             buyer.cash -= price;
-            seller.phone = buyer.phone;
-            seller.phone = null;
+            buyer.setPhone(seller.getPhone());
+            seller.setPhone(null);
             System.out.println("Telefon sprzedany.");
         }
     }
@@ -114,5 +104,152 @@ public class Phone extends Device {
     public void installAnnApp(URL url)  {
         System.out.println("Próbuję pobrać aplikację.");
         System.out.println("Zainstalowano aplikację o nazwie: " + url.getFile() + " z serwera o adresie: " + url.getHost());
+    }
+
+    //method instalAnnApp with parameter Application and buyer
+    public void installAnnApp(Application application, Human buyer)
+    {
+        //Checking whether buyer is the owner of the phone
+        boolean isOwner = false;
+        try {
+            if (this.equals(buyer.getPhone())) {
+                isOwner = true;
+            }
+
+            if (!isOwner) {
+                throw new Exception();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Kupujący nie ma telefonu.");
+        }
+
+        //Check if owner has enough cash, then install the application
+        try {
+            if (buyer.cash < application.priceOfApplication)
+            {
+               throw new Exception();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
+        }
+        if (isOwner && buyer.cash >= application.priceOfApplication)
+        {
+            this.applicationSet.add(application);
+            buyer.cash -= application.priceOfApplication;
+            System.out.println("Aplikacja została zainstalowana.");
+        }
+    }
+
+    //method isInstalledApp with Application object as parameter, checks whether application is installed
+    public boolean isInstalledApp(Application application)
+    {
+        return applicationSet.contains(application);
+    }
+
+    //method isInstalledApp with parameter applicationname, checks whether application is installed
+    public boolean isInstalledApp(String applicationName)
+    {
+        boolean isInstalled = false;
+        if (!applicationSet.isEmpty())
+        {
+            for (Application checkedApplication: applicationSet)
+            {
+                if (Objects.equals(checkedApplication.nameOfApplication, applicationName))
+                {
+                    isInstalled = true;
+                    break;
+                }
+            }
+        }
+        return isInstalled;
+    }
+
+    //method listFreeApp prints in console all installed free applications
+    public void listFreeApp()
+    {
+        if (!applicationSet.isEmpty())
+        {
+            System.out.println("Lista zainstalowanych darmowych aplikacji:\n");
+            for (Application checkedApplication: applicationSet)
+            {
+                if (checkedApplication.priceOfApplication == 0.0)
+                {
+                    System.out.println(checkedApplication);
+                }
+            }
+        }
+        else
+        {
+            System.out.println("Nie ma zainstalowanych żadnych aplikacji.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "screenSize=" + screenSize +
+                ", phoneOSVersion='" + phoneOSVersion + '\'' +
+                ", applicationSet=" + applicationSet +
+                "} " + super.toString();
+    }
+
+    //method valueOfInstalledApplications prints in console value of all installed applications
+    public void valueOfInstalledApplications()
+    {
+        double value = 0.0;
+        if (!applicationSet.isEmpty())
+        {
+            for (Application checkedApplication: applicationSet)
+            {
+                value += checkedApplication.priceOfApplication;
+            }
+            System.out.println("Wartość zainstalowanych aplikacji wynosi:" + value);
+        }
+        else
+        {
+            System.out.println("Nie ma zainstalowanych żadnych aplikacji.");
+        }
+    }
+
+    //method listInstalledApplicationAlphabetically lists all installed application in alphabetical order
+    public void listInstalledApplicationAlphabetically()
+    {
+        if (!applicationSet.isEmpty())
+        {
+            Application[] tempList = applicationSet.toArray(new Application[0]);
+
+            Arrays.sort(tempList, Comparator.comparing(app -> app.nameOfApplication));
+
+            System.out.println("Aplikacje posortowane wg nazw alfabetycznie:");
+
+            for (Application application: tempList
+            ) { System.out.println(application); }
+        }
+        else
+        {
+            System.out.println("Nie ma zainstalowanych żadnych aplikacji.");
+        }
+    }
+
+    //method listInstalledApplicationByAscendingPrices lists all installed application alphabetically
+    public void listInstalledApplicationByAscendingPrices() {
+        if (!applicationSet.isEmpty()) {
+            Application[] tempList = applicationSet.toArray(new Application[0]);
+
+            Arrays.sort(tempList, Comparator.comparing(app -> app.priceOfApplication));
+
+            System.out.println("Aplikacje posortowane rosnąco wg cen :");
+
+            for (Application application : tempList
+            ) {
+                System.out.println(application);
+            }
+        } else {
+            System.out.println("Nie ma zainstalowanych żadnych aplikacji.");
+        }
     }
 }

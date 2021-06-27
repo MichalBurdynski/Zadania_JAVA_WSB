@@ -11,7 +11,16 @@ public class Human extends Animal{
     public String firstName;
     public String lastName;
     public Animal pet;
-    public Phone phone;
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
+
+    protected Phone phone;
     private final Car[] garage;
     public int garageCapacity;
 

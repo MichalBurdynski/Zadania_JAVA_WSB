@@ -158,7 +158,7 @@ public class Main {
 
         //Human2 - seller, human3 - buyer
         human3.cash = 10000.0;
-        human2.phone = phone1;
+        human2.setPhone(phone1);
 
         //Printing out information about human2 i human3 before transaction of selling
         System.out.println(human2);
@@ -378,5 +378,65 @@ public class Main {
         //Checking number of sales transaction of car8
         System.out.println("Sprawdzenie ilości transakcji sprzedaży auta car3\n");
         System.out.println( (car3).getNumberOfTransactions());
+
+        //Testting Application Class
+
+        System.out.println("\nTesty klasy aplikacji\n");
+
+        //Creating objects
+        Application app1 = new Application("Arbuzy", "1.01", 5.0);
+        Application app2 = new Application("Banany", "1.01", 10.0);
+        Application app3 = new Application("Cebulki", "1.01", 0.0);
+        Application app4 = new Application("Dyński", "1.01", 0.0);
+        Application app5 = new Application("Agreściki", "1.01", 15.0);
+        Application app6 = new Application("Ananasy", "1.01", 30000.0);
+
+        //Setting phone3 for human1
+        human1.setPhone(phone3);
+
+        //Printing information about available amount of cash in console before transactions 'sell'
+        System.out.println("Ilość pieniędzy przed zakupami aplikacji: "+human1.cash);
+
+        //Trying to install an application on phone that owner is not buyer
+        phone3.installAnnApp(app1, human4);
+
+
+        //Trying to install an application that the owner of the phone can not buy due to lack of cash
+        phone3.installAnnApp(app6, human1);
+
+        //Installing applications
+        phone3.installAnnApp(app1, human1);
+        phone3.installAnnApp(app2, human1);
+        phone3.installAnnApp(app3, human1);
+        phone3.installAnnApp(app4, human1);
+        phone3.installAnnApp(app5, human1);
+
+        //Printing information about available amount of cash in console after transactions
+        System.out.println("Ilość pieniędzy  po zakupach aplikacji: "+human1.cash);
+
+        //Checking if the application is installed on the phone
+        System.out.println("Czy zainstalowano na telefonie aplikację app1?");
+        System.out.println(phone3.isInstalledApp(app1));
+        System.out.println("Czy zainstalowano na telefonie aplikację app6?");
+        System.out.println(phone3.isInstalledApp(app6));
+        System.out.println("Czy zainstalowano na telefonie aplikację o nazwie Banany?");
+        System.out.println(phone3.isInstalledApp("Banany"));
+        System.out.println("Czy zainstalowano na telefonie aplikację o nazwie Sliwki?");
+        System.out.println(phone3.isInstalledApp("Sliwki"));
+
+        //Printing value of all installed applications
+        phone3.valueOfInstalledApplications();
+
+        //Printing list of all installed free applications
+        phone3.listFreeApp();
+
+        //Printing list of applications in alphabetical order
+        phone3.listInstalledApplicationAlphabetically();
+
+        //Printing list of applications in order of increasing application prices
+        phone3.listInstalledApplicationByAscendingPrices();
+
+        //Printing full information about 'human1' object in console
+        System.out.println(human1);
     }
 }
