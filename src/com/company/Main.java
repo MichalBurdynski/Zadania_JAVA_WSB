@@ -146,28 +146,9 @@ public class Main {
         System.out.println(human2);
         System.out.println(human3);
 
-        try {
-            car2.sell(human2, human3, 100000.0);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        try {
+        car2.sell(human2, human3, 100000.0);
         car2.sell(human3, human2, 10000.0);
-        }
-        catch (Exception e)
-        {
-        e.printStackTrace();
-        }
-        try{
         car2.sell(human2, human3, 8500.0);
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
 
         //Printing out information about human2 i human3 after the transaction of selling
         System.out.println(human2);
@@ -236,7 +217,7 @@ public class Main {
         //Overloading installAnnApp method with different parameters
         phone3.installAnnApp("Soccer Manager");
         phone3.installAnnApp("Soccer Manager", "15.0");
-        phone3.installAnnApp("Soccer Manager", "15.0", "https://google.com/SoccerManager.jar");
+        phone3.installAnnApp("Soccer Manager", "15.0", "google.com");
         ArrayList<String> applicationList = new ArrayList<>();
         applicationList.add("Soccer Manager");
         applicationList.add("Car Race");
@@ -247,12 +228,6 @@ public class Main {
             URL url1 = new URL("https", "www.wp.pl", "wp.exe");
             phone3.installAnnApp(url1);
         } catch (MalformedURLException e) { System.out.println("Błędny URL.");
-        }
-        try {
-            URL url2 = null;
-            phone3.installAnnApp(url2);
-        } catch (MalformedURLException e) {
-            System.out.println("Błędny URL.");
         }
         try {
             URL url3 = new URL(Phone.DEFAULT_PROTOCOL, Phone.DEFAULT_SERVER_ADDRESS, Phone.DEFAULT_FILENAME);
@@ -326,78 +301,22 @@ public class Main {
         //Selling car
 
         //Trying to sell car that human does not have
-        try {
             car12.sell(human4, human1, 30000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
         //Trying to buy car when buyer does not have enough cash
-        try {
             car13.sell(human4, human1, 50000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
         //Trying to sell car that human does not have
-        try {
             car13.sell(human1, human4, 5000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
         //Trying to sell too much cars
-        try {
             car13.sell(human4, human1, 1000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
             car14.sell(human4, human1, 1000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
             car15.sell(human4, human1, 2000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
             car16.sell(human4, human1, 3000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
             car17.sell(human4, human1, 2000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
             car18.sell(human4, human1, 1000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
             car19.sell(human4, human1, 1000.0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
         //Printing full information about object 'human4' and 'human1' in console after transaction 'sell'
         System.out.println();
@@ -409,20 +328,8 @@ public class Main {
         System.out.println();
 
         //Testing sorting
-        try {
-            human1.sortCarByYearOfProduction();
-        }
-        catch (NullPointerException e)
-        {
-            System.out.println("Nie można postortować pustej tablicy.");
-        }
-        try {
-            human4.sortCarByYearOfProduction();
-        }
-        catch (NullPointerException e)
-        {
-            System.out.println("Nie można posortować pustej tablicy.");
-        }
+        human1.sortCarByYearOfProduction();
+        human4.sortCarByYearOfProduction();
 
 
         //Printing full information about object 'human4' and 'human1' in console after sorting

@@ -3,10 +3,7 @@ package com.company.creatures;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 public class Human extends Animal{
     public static final String DEFAULT_HUMAN_SPECIES = "Homo sapiens sapiens";
@@ -84,6 +81,9 @@ public class Human extends Animal{
         {
             System.out.println("Nie można umieścić auta. Numer miejsca "+garageSpaceNumber+ " powyżej dopuszczalnej limitu miejsc: "+this.garage.length);
         }
+        else if (garageSpaceNumber <= this.garage.length && car == null) {
+            this.garage[garageSpaceNumber] = null;
+        }
         else if (garageSpaceNumber <= this.garage.length && garage[garageSpaceNumber] == null) {
             if (this.salary > car.value)
             {
@@ -99,9 +99,6 @@ public class Human extends Animal{
             {
                 System.out.println("Auto za drogie. Zmień pracę lub poproś o podwyżkę.");
             }
-        }
-        else if (garageSpaceNumber <= this.garage.length && car == null) {
-            this.garage[garageSpaceNumber] = null;
         }
         else
         {
@@ -128,8 +125,9 @@ public class Human extends Animal{
     /*Implementation of method sortCarByYearOfProduction, sorting out Car class objects
      in 'garage' array by value of 'yearOfProduction' field in ascending order*/
     public void sortCarByYearOfProduction() {
-        Arrays.sort(garage, Comparator.comparing(car -> car.yearOfProduction));
-    }
+        Arrays.sort(garage, Comparator.nullsLast(Comparator.comparingInt(o -> o.yearOfProduction)));
+        }
+
 
     @Override
     public boolean equals(Object o) {

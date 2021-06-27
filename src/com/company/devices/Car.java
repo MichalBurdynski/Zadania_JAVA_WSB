@@ -43,11 +43,15 @@ public abstract class Car extends Device {
     }
 
     //Implementation of the sell method of interface Saleable
-    public void sell(Human seller, Human buyer, Double price) throws Exception {
+    public void sell(Human seller, Human buyer, Double price) {
 
-        //Checking if seller has an item to sell
-        boolean isOwner = false;
         int carPositionInGarage = 0;
+        boolean isOwner = false;
+        int freeGarageSpaces = 0;
+        //Checking if seller has an item to sell
+        try
+        {
+
         for (int i = 0; i < seller.garageCapacity ; i++)
         {
             if (this.equals(seller.getCar(i)))
@@ -57,27 +61,46 @@ public abstract class Car extends Device {
                 break;
             }
         }
-
-        if (!isOwner)
+           if (!isOwner)
+           {
+               throw new Exception();
+           }
+        }
+        catch (Exception e)
         {
-        throw new Exception("Sprzedający nie ma samochodu, który próbuje sprzedać.");
+            System.out.println("Sprzedający nie ma samochodu, który próbuje sprzedać.");
         }
 
-        if (buyer.cash < price)
+        //Checking if buyer has enough cash
+        try {
+            if (buyer.cash < price)
+            {
+                throw new Exception();
+            }
+        }
+        catch (Exception e)
         {
-           throw new Exception("Kupujący nie ma wystarczającej ilości pieniędzy.");
+            System.out.println("Kupujący nie ma wystarczającej ilości pieniędzy.");
         }
 
         //Checking whether buyer has a free garage space
-        int freeGarageSpaces = buyer.garageCapacity;
-        if (buyer.garageCapacity > 0) {
-            for (int i = 0; i < buyer.garageCapacity; i++) {
-                if (buyer.getCar(i) != null) {
-                    freeGarageSpaces--;
+        try {
+            freeGarageSpaces = buyer.garageCapacity;
+            if (buyer.garageCapacity > 0) {
+                for (int i = 0; i < buyer.garageCapacity; i++) {
+                    if (buyer.getCar(i) != null) {
+                        freeGarageSpaces--;
+                    }
                 }
             }
+            if (freeGarageSpaces == 0)
+            {
+                throw new Exception();
+            }
         }
-        if (freeGarageSpaces == 0) throw new Exception("Kupujący nie ma miejsca w garażu.");
+        catch (Exception e) {
+            System.out.println("Kupujący nie ma miejsca w garażu.");
+        }
 
         //If all conditions are met - transaction is executed.
 
@@ -92,11 +115,13 @@ public abstract class Car extends Device {
             }
         }
 
-        seller.cash += price;
-        buyer.cash -= price;
-        buyer.setCar(this, newCarPositionInGarage);
-        seller.setCar(null, carPositionInGarage);
-        System.out.println("Samochód sprzedany.");
+        if (isOwner && (buyer.cash > price) && freeGarageSpaces !=0) {
+            seller.cash += price;
+            buyer.cash -= price;
+            buyer.setCar(this, newCarPositionInGarage);
+            seller.setCar(null, carPositionInGarage);
+            System.out.println("Samochód sprzedany.");
+        }
     }
 
     //Declaration of abstract method refuel
